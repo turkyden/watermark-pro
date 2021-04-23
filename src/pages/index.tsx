@@ -141,55 +141,63 @@ export default function IndexPage() {
 
   return (
     <div className="w-screen h-screen flex justify-between">
-      <div className="relative w-full h-full bg-gray-200 flex flex-col justify-center items-center">
-        <div className="absolute w-full h-96">
-          <Rnd
-            className="flex justify-center items-center border border-solid border-gray-300 hover:border-blue-500 bg-gray-300 bg-cover bg-center bg-no-repeat"
-            style={{ backgroundImage: `url(https://jdc.jd.com/img/600x400)` }}
-            size={{ width, height }}
-            position={{ x, y }}
-            onDragStop={(e, d) => {
-              setX(d.x);
-              setY(d.y);
-            }}
-            onResizeStop={(e, direction, ref, delta, position) => {
-              setWidth(ref.offsetWidth);
-              setHeight(ref.offsetHeight);
-              setX(position.x);
-              setY(position.y);
-            }}
-          ></Rnd>
-        </div>
-        <div className="absolute bottom-0 left-0 w-full p-10 overflow-auto bg-white shadow">
-          <Upload
-            action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-            listType="picture-card"
-            fileList={fileList}
-            onPreview={onPreview}
-            onChange={onChange}
-          >
-            {fileList.length >= 8 ? null : uploadButton}
-          </Upload>
-          <Modal
-            visible={previewVisible}
-            title={previewTitle}
-            footer={null}
-            onCancel={onCancel}
-          >
-            <img alt="example" style={{ width: '100%' }} src={previewImage} />
-          </Modal>
-        </div>
+      <div className="w-full" style={{ height: 700 }}>
+        <Rnd
+          className="flex justify-center items-center border border-solid border-gray-300 hover:border-blue-500 bg-gray-300 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: `url(https://jdc.jd.com/img/600x400)` }}
+          size={{ width, height }}
+          position={{ x, y }}
+          onDragStop={(e, d) => {
+            setX(d.x);
+            setY(d.y);
+          }}
+          onResizeStop={(e, direction, ref, delta, position) => {
+            setWidth(ref.offsetWidth);
+            setHeight(ref.offsetHeight);
+            setX(position.x);
+            setY(position.y);
+          }}
+        ></Rnd>
       </div>
-      <div className="w-96 h-full p-4">
-        <div className="flex justify-center items-center">
-          <h2>💦 WaterMark Pro</h2>
-        </div>
-        <div className="py-4"></div>
-        <FormRender form={form} schema={schema} onFinish={() => {}} />
-        <Button block type="primary" onClick={form.submit}>
-          导出
-        </Button>
+      <div className="w-full p-10 overflow-auto bg-white shadow">
+        <Upload
+          action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+          listType="picture-card"
+          fileList={fileList}
+          onPreview={onPreview}
+          onChange={onChange}
+        >
+          {fileList.length >= 8 ? null : uploadButton}
+        </Upload>
+        <Modal
+          visible={previewVisible}
+          title={previewTitle}
+          footer={null}
+          onCancel={onCancel}
+        >
+          <img alt="example" style={{ width: '100%' }} src={previewImage} />
+        </Modal>
       </div>
+      <Rnd
+        dragHandleClassName="handle"
+        default={{
+          x: 0,
+          y: 0,
+          width: 320,
+          height: 200,
+        }}
+      >
+        <div className="fixed w-64 p-4 bg-white">
+          <div className="handle | flex justify-center items-center">
+            <h2>💦 WaterMark Pro</h2>
+          </div>
+          <div className="py-4"></div>
+          <FormRender form={form} schema={schema} onFinish={() => {}} />
+          <Button block type="primary" onClick={form.submit}>
+            导出
+          </Button>
+        </div>
+      </Rnd>
     </div>
   );
 }
