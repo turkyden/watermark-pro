@@ -20,10 +20,12 @@
     ]
   },
   "dependencies": {
+    "@ant-design/icons": "^4.6.2",
     "@ant-design/pro-layout": "^6.5.0",
     "@umijs/preset-react": "1.x",
     "antd": "^4.15.2",
     "form-render": "^1.1.2",
+    "react-rnd": "^10.2.4",
     "umi": "^3.4.11",
     "umi-plugin-tailwindcss": "^3.0.4"
   },

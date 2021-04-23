@@ -1,7 +1,10 @@
-import React from 'react';
-import { Button } from 'antd';
+import React, { useState, useEffect } from 'react';
+import { Button, Drawer, Upload, Modal } from 'antd';
+import { PlusOutlined } from '@ant-design/icons';
 import FormRender, { useForm } from 'form-render';
-import { useEffect } from 'react';
+import { Rnd } from 'react-rnd';
+
+import '../../node_modules/react-rnd';
 
 const schema = {
   type: 'object',
@@ -55,14 +58,126 @@ const schema = {
   displayType: 'column',
 };
 
+const getBase64 = (file) => {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = (error) => reject(error);
+  });
+};
+
 export default function IndexPage() {
   const form = useForm();
 
+  const [width, setWidth] = useState(600);
+  const [height, setHeight] = useState(400);
+  const [x, setX] = useState(200);
+  const [y, setY] = useState(200);
+
+  const [visible, setVisuble] = useState(true);
+  const onClose = () => useState(false);
+
+  const [previewVisible, setPreviewVisible] = useState(false);
+  const [previewImage, setPreviewImage] = useState('');
+  const [previewTitle, setPreviewTitle] = useState('');
+  const [fileList, setFileList] = useState([
+    {
+      uid: '-1',
+      name: 'image.png',
+      status: 'done',
+      url:
+        'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+    },
+    {
+      uid: '-2',
+      name: 'image.png',
+      status: 'done',
+      url:
+        'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+    },
+    {
+      uid: '-3',
+      name: 'image.png',
+      status: 'done',
+      url:
+        'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+    },
+    {
+      uid: '-4',
+      name: 'image.png',
+      status: 'done',
+      url:
+        'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+    },
+    {
+      uid: '-5',
+      name: 'image.png',
+      status: 'error',
+    },
+  ]);
+
+  const onCancel = () => setPreviewVisible(false);
+
+  const onPreview = async (file: any) => {
+    if (!file.url && !file.preview) {
+      file.preview = await getBase64(file.originFileObj);
+    }
+    setPreviewVisible(true);
+    setPreviewImage(file.url || file.preview);
+    setPreviewTitle(
+      file.name || file.url.substring(file.url.lastIndexOf('/') + 1),
+    );
+  };
+
+  const onChange = ({ fileList }: any) => setFileList(fileList);
+
+  const uploadButton = (
+    <div>
+      <PlusOutlined />
+      <div style={{ marginTop: 8 }}>Upload</div>
+    </div>
+  );
+
   return (
     <div className="w-screen h-screen flex justify-between">
-      <div className="w-full h-full bg-gray-200 flex flex-col justify-center items-center">
-        <div>
-          <img src="https://jdc.jd.com/img/600x400" alt="占位图" />
+      <div className="relative w-full h-full bg-gray-200 flex flex-col justify-center items-center">
+        <div className="absolute w-full h-96">
+          <Rnd
+            className="flex justify-center items-center border border-solid border-gray-300 hover:border-blue-500 bg-gray-300 bg-cover bg-center bg-no-repeat"
+            style={{ backgroundImage: `url(https://jdc.jd.com/img/600x400)` }}
+            size={{ width, height }}
+            position={{ x, y }}
+            onDragStop={(e, d) => {
+              setX(d.x);
+              setY(d.y);
+            }}
+            onResizeStop={(e, direction, ref, delta, position) => {
+              setWidth(ref.offsetWidth);
+              setHeight(ref.offsetHeight);
+              setX(position.x);
+              setY(position.y);
+            }}
+          ></Rnd>
+        </div>
+        <div className="absolute bottom-0 left-0 w-full p-10 overflow-auto bg-white shadow">
+          <Upload
+            action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+            listType="picture-card"
+            fileList={fileList}
+            onPreview={onPreview}
+            onChange={onChange}
+          >
+            {fileList.length >= 8 ? null : uploadButton}
+          </Upload>
+          <Modal
+            visible={previewVisible}
+            title={previewTitle}
+            footer={null}
+            onCancel={onCancel}
+          >
+            <img alt="example" style={{ width: '100%' }} src={previewImage} />
+          </Modal>
         </div>
       </div>
       <div className="w-96 h-full p-4">
