@@ -1,10 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import { Button, Drawer, Upload, Modal } from 'antd';
-import { PlusOutlined } from '@ant-design/icons';
+import React, { useState, useEffect, useRef } from 'react';
+import { Button, Drawer, Upload } from 'antd';
+import {
+  PlusOutlined,
+  CaretUpOutlined,
+  CaretDownOutlined,
+  SearchOutlined,
+} from '@ant-design/icons';
 import FormRender, { useForm } from 'form-render';
 import { Rnd } from 'react-rnd';
+import Draggable from 'react-draggable';
+import { useSize, useToggle } from 'ahooks';
 
-import '../../node_modules/react-rnd';
+import html2canvas from 'html2canvas';
+import { saveAs } from 'file-saver';
+
+import { Watermark } from '../components';
 
 const schema = {
   type: 'object',
@@ -68,69 +78,69 @@ const getBase64 = (file) => {
 };
 
 export default function IndexPage() {
+  const [collapsed, { toggle: toggleCollapsed }] = useToggle(true);
+
   const form = useForm();
+
+  const watch = {
+    // # 为全局
+    '#': (val: any) => {
+      console.log('表单的时时数据为：', val);
+    },
+    input1: (val: any) => {
+      if (val !== undefined) {
+        form.onItemChange('input2', val);
+      }
+    },
+  };
+
+  const { width: screenWidth = 0, height: screenHeight = 0 } = useSize(
+    document.body,
+  );
+
+  const onExport = async () => {
+    const canvasDOM = document.querySelector('canvas');
+    if (canvasDOM) {
+      const canvas = await html2canvas(canvasDOM as HTMLElement);
+      canvas.toBlob((blob) => saveAs(blob, 'pretty image.png'));
+    }
+  };
 
   const [width, setWidth] = useState(600);
   const [height, setHeight] = useState(400);
   const [x, setX] = useState(200);
   const [y, setY] = useState(200);
 
-  const [visible, setVisuble] = useState(true);
-  const onClose = () => useState(false);
-
-  const [previewVisible, setPreviewVisible] = useState(false);
-  const [previewImage, setPreviewImage] = useState('');
-  const [previewTitle, setPreviewTitle] = useState('');
   const [fileList, setFileList] = useState([
     {
-      uid: '-1',
+      uid: '0',
       name: 'image.png',
       status: 'done',
       url:
         'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
     },
     {
-      uid: '-2',
+      uid: '1',
       name: 'image.png',
       status: 'done',
-      url:
-        'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-    },
-    {
-      uid: '-3',
-      name: 'image.png',
-      status: 'done',
-      url:
-        'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-    },
-    {
-      uid: '-4',
-      name: 'image.png',
-      status: 'done',
-      url:
-        'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-    },
-    {
-      uid: '-5',
-      name: 'image.png',
-      status: 'error',
+      url: 'https://jdc.jd.com/img/600x400',
     },
   ]);
 
-  const onCancel = () => setPreviewVisible(false);
+  const initalImage = fileList.length > 0 ? fileList[0].url : '';
+  const [previewImage, setPreviewImage] = useState(initalImage || '');
 
   const onPreview = async (file: any) => {
     if (!file.url && !file.preview) {
       file.preview = await getBase64(file.originFileObj);
     }
-    setPreviewVisible(true);
     setPreviewImage(file.url || file.preview);
-    setPreviewTitle(
-      file.name || file.url.substring(file.url.lastIndexOf('/') + 1),
-    );
   };
 
-  const onChange = ({ fileList }: any) => setFileList(fileList);
+  const onChange = async ({ fileList, file }: any) => {
+    setFileList(fileList);
+    await onPreview(fileList[fileList.length - 1]);
+  };
 
   const uploadButton = (
     <div>
@@ -140,11 +150,14 @@ export default function IndexPage() {
   );
 
   return (
-    <div className="w-screen h-screen flex justify-between">
-      <div className="w-full" style={{ height: 700 }}>
+    <div className="w-screen h-screen">
+      <div
+        className="w-full bg-gray-100"
+        style={{ height: screenHeight - 144 }}
+      >
         <Rnd
-          className="flex justify-center items-center border border-solid border-gray-300 hover:border-blue-500 bg-gray-300 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: `url(https://jdc.jd.com/img/600x400)` }}
+          className="canvas | flex justify-center items-center border border-solid border-gray-300 hover:border-blue-500 bg-gray-300 bg-cover bg-center bg-no-repeat"
+          bounds="parent"
           size={{ width, height }}
           position={{ x, y }}
           onDragStop={(e, d) => {
@@ -157,11 +170,40 @@ export default function IndexPage() {
             setX(position.x);
             setY(position.y);
           }}
-        ></Rnd>
+        >
+          <Watermark width={width} height={height} />
+        </Rnd>
+        <Draggable position={{ x: screenWidth - 340, y: 20 }} handle=".handle">
+          <div className="w-64 px-4 bg-white rounded-xl shadow-lg">
+            <div className="flex justify-between items-center py-2">
+              {React.createElement(
+                collapsed ? CaretDownOutlined : CaretUpOutlined,
+                { onClick: () => toggleCollapsed() },
+              )}
+              <span className="handle | text-lg" style={{ cursor: 'grab' }}>
+                : : :
+              </span>
+              <SearchOutlined />
+            </div>
+            <div className={[collapsed ? 'block' : 'hidden', 'pb-4'].join(' ')}>
+              <div className="flex justify-center items-center py-2">
+                <h2>💦 WaterMark Pro</h2>
+              </div>
+              <FormRender
+                form={form}
+                schema={schema}
+                onFinish={() => {}}
+                watch={watch}
+              />
+              <Button block type="primary" onClick={onExport}>
+                导出
+              </Button>
+            </div>
+          </div>
+        </Draggable>
       </div>
-      <div className="w-full p-10 overflow-auto bg-white shadow">
+      <div className="w-full p-4 overflow-auto bg-white shadow">
         <Upload
-          action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
           listType="picture-card"
           fileList={fileList}
           onPreview={onPreview}
@@ -169,35 +211,7 @@ export default function IndexPage() {
         >
           {fileList.length >= 8 ? null : uploadButton}
         </Upload>
-        <Modal
-          visible={previewVisible}
-          title={previewTitle}
-          footer={null}
-          onCancel={onCancel}
-        >
-          <img alt="example" style={{ width: '100%' }} src={previewImage} />
-        </Modal>
       </div>
-      <Rnd
-        dragHandleClassName="handle"
-        default={{
-          x: 0,
-          y: 0,
-          width: 320,
-          height: 200,
-        }}
-      >
-        <div className="fixed w-64 p-4 bg-white">
-          <div className="handle | flex justify-center items-center">
-            <h2>💦 WaterMark Pro</h2>
-          </div>
-          <div className="py-4"></div>
-          <FormRender form={form} schema={schema} onFinish={() => {}} />
-          <Button block type="primary" onClick={form.submit}>
-            导出
-          </Button>
-        </div>
-      </Rnd>
     </div>
   );
 }
