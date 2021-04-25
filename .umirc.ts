@@ -1,6 +1,9 @@
 import { defineConfig } from 'umi';
 
 export default defineConfig({
+  theme: {
+    'primary-color': '#6366F1',
+  },
   antd: {
     dark: false, // 开启暗色主题
   },

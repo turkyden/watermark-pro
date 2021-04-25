@@ -1,0 +1,25 @@
+/* 美化滚动条样式 */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 4px;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+/*定义滚动条轨道 内阴影+圆角*/
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: transparent;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+/*定义滑块 内阴影+圆角*/
+::-webkit-scrollbar-thumb {
+  border-radius: 0px;
+  -webkit-box-shadow: none;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.ant-upload-list-picture-card .ant-upload-list-item{
+  background-color: #fff;
+}
+
+.ant-upload-list-picture .ant-upload-list-item:hover, .ant-upload-list-picture-card .ant-upload-list-item:hover {
+  background: #fff;
+}

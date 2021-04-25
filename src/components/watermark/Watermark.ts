@@ -116,7 +116,7 @@ class Watermark {
     this.img.setAttribute('crossOrigin', 'anonymous');
     this.img.onload = () => {
       this.img_width = this.img.width as number;
-      const max = window.innerWidth;
+      const max = window.innerWidth - 100;
       if (this.img_width > max) {
         this.img_width = max;
         this.img_height =

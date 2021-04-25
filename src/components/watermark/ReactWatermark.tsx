@@ -11,11 +11,13 @@ interface Options {
 interface WatermarkProps {
   url: string;
   options: Options;
+  scale: number;
 }
 
 const ReactWatermark: React.FC<WatermarkProps> = ({
   url = 'https://jdc.jd.com/img/600x400',
   options,
+  scale,
 }) => {
   const ref = useRef(null);
   const watermark = useRef(null);
@@ -33,7 +35,8 @@ const ReactWatermark: React.FC<WatermarkProps> = ({
   return (
     <canvas
       ref={ref}
-      className="border-0 border-solid border-gray-300 hover:border-blue-500"
+      className="border-2 border-solid border-gray-300 hover:border-blue-500"
+      style={{ transform: `scale(${scale / 100})` }}
     />
   );
 };

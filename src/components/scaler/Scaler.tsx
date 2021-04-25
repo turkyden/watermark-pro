@@ -9,17 +9,19 @@ import {
 } from '@ant-design/icons';
 
 export default function Scaler({
+  scale,
   onZoomUp,
   onZoomDown,
   onReset,
 }: {
+  scale: number;
   onZoomUp: () => void;
   onZoomDown: () => void;
   onReset: () => void;
 }) {
   return (
     <Draggable>
-      <div className="absolute bottom-24 right-24 shadow-lg rounded flex bg-gray-800">
+      <div className="absolute z-50 bottom-4 right-4 shadow-lg rounded flex bg-gray-800">
         <div
           className="px-2 py-2 select-none flex flex-col justify-center items-center"
           style={{ cursor: 'grab' }}
@@ -39,18 +41,21 @@ export default function Scaler({
             ></path>
           </svg>
         </div>
-        <div className="px-2 py-2 hover:text-blue-500">
+        <div className="px-2 py-2 text-gray-500 hover:text-blue-500">
           <PlusOutlined onClick={onZoomUp} />
         </div>
-        <div className="px-2 py-2 hover:text-blue-500">
+        <div className="px-2 py-2 text-gray-500 hover:text-blue-500">
           <MinusOutlined onClick={onZoomDown} />
         </div>
-        <div className="px-2 py-2 hover:text-blue-500">
+        <div className="px-2 py-2 text-gray-500 hover:text-blue-500">
           <ReloadOutlined onClick={onReset} />
         </div>
-        <div className="px-4 py-2 hover:text-blue-500">
-          <Hotkeys />
+        <div className="px-2 py-2 text-gray-500">
+          <span>{scale}%</span>
         </div>
+        {/* <div className="px-4 py-2 text-gray-500 hover:text-blue-500">
+          <Hotkeys />
+        </div> */}
       </div>
     </Draggable>
   );
@@ -113,30 +118,6 @@ function Hotkeys() {
         </p>
         <p className="pl-4 text-xs">Drag Canvas</p>
       </div>
-      <div className="flex justify-between items-center">
-        <p>
-          <code className="border border-solid border-gray-600 px-2 rounded-sm">
-            ctrl
-          </code>{' '}
-          +{' '}
-          <code className="border border-solid border-gray-600 px-2 rounded-sm">
-            space
-          </code>
-        </p>
-        <p className="pl-4 text-xs">Drag Canvas</p>
-      </div>
-      <div className="flex justify-between items-center">
-        <p>
-          <code className="border border-solid border-gray-600 px-2 rounded-sm">
-            ctrl
-          </code>{' '}
-          +{' '}
-          <code className="border border-solid border-gray-600 px-2 rounded-sm">
-            space
-          </code>
-        </p>
-        <p className="pl-4 text-xs">Drag Canvas</p>
-      </div>
     </div>
   );
 
@@ -145,14 +126,4 @@ function Hotkeys() {
       <InsertRowBelowOutlined />
     </Popover>
   );
-
-  // return (
-  //   <>
-  //     {
-  //       isPressed('space')
-  //       ? <InsertRowBelowOutlined />
-  //       : <p>xx</p>
-  //     }
-  //   </>
-  // )
 }
