@@ -29,7 +29,6 @@ interface Options {
 class Watermark {
   private canvas: HTMLCanvasElement;
   private img: CanvasImageSource;
-  private step: number = 0;
   private cw: HTMLCanvasElement = document.createElement('canvas');
   // document.getElementById("test").appendChild(cw);
   private img_width: number = 100;
@@ -47,7 +46,6 @@ class Watermark {
     // const watermarkCanvas = document.createElement("canvas");
     // watermarkCanvas.width = "160px";
     // watermarkCanvas.height = "100px";
-    const ctx = canvas.getContext('2d');
     this.createWatermarkCanvas();
   }
 
@@ -92,44 +90,16 @@ class Watermark {
   }
 
   drawImage() {
-    const { canvas, step, img, img_width, img_height } = this;
+    const { canvas, img, img_width, img_height } = this;
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    switch (step) {
-      default:
-      case 0:
-        canvas.width = img_width;
-        canvas.height = img_height;
-        ctx.drawImage(img, 0, 0, img_width, img_height);
-        break;
-      case 1:
-        canvas.width = img_height;
-        canvas.height = img_width;
-        ctx.save();
-        ctx.rotate((90 * Math.PI) / 180);
-        ctx.drawImage(img, 0, -img_height, img_width, img_height);
-        ctx.restore();
-        break;
-      case 2:
-        canvas.width = img_width;
-        canvas.height = img_height;
-        ctx.save();
-        ctx.rotate((180 * Math.PI) / 180);
-        ctx.drawImage(img, -img_width, -img_height, img_width, img_height);
-        ctx.restore();
-        break;
-      case 3:
-        canvas.width = img_height;
-        canvas.height = img_width;
-        ctx.save();
-        ctx.rotate((270 * Math.PI) / 180);
-        ctx.drawImage(img, -img_width, 0, img_width, img_height);
-        ctx.restore();
-        break;
-    }
+    canvas.width = img_width;
+    canvas.height = img_height;
+    ctx.drawImage(img, 0, 0, img_width, img_height);
   }
 
+  // 新增水印
   addWatermark() {
     const { canvas, cw } = this;
     const ctx = canvas.getContext('2d');
@@ -140,12 +110,13 @@ class Watermark {
     ctx.fillRect(0, 0, canvas.width, canvas.height);
   }
 
+  // 绘制背景图
   draw(dataURL: string) {
-    this.step = 0;
     this.img = new Image();
+    this.img.setAttribute('crossOrigin', 'anonymous');
     this.img.onload = () => {
       this.img_width = this.img.width as number;
-      const max = 2000;
+      const max = window.innerWidth;
       if (this.img_width > max) {
         this.img_width = max;
         this.img_height =
@@ -156,12 +127,6 @@ class Watermark {
       this._draw();
     };
     this.img.src = dataURL;
-  }
-
-  rotate() {
-    if (!this.img) return;
-    this.step >= 3 ? (this.step = 0) : this.step++;
-    this._draw();
   }
 
   setOptions = (obj: Options) => {
