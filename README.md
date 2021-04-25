@@ -19,6 +19,7 @@ $ yarn start
 - [watermark](http://watermark.dxcweb.com/)
 - [react-rnd](https://github.com/bokuweb/react-rnd)
 - [watermark](https://github.com/pansyjs/react-components/tree/master/packages/watermark)
+- [pattern-css](https://bansal.io/pattern-css)
 
 ## Feather
 

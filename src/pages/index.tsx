@@ -139,7 +139,7 @@ export default function IndexPage() {
   const [guiPosition, setGuiPosition] = useState({ x: -16, y: 16 });
   return (
     <div className="w-screen h-screen oveflow-hidden">
-      <div className="w-full h-full bg-gray-100 flex flex-col justify-center items-center bg-gray-300 bg-cover bg-center bg-no-repeat oveflow-hidden">
+      <div className="w-full h-full bg-gray-200 text-gray-500 pattern-dots-sm flex flex-col justify-center items-center oveflow-hidden">
         <Watermark url={previewImage} options={options} />
         <Draggable
           position={guiPosition}

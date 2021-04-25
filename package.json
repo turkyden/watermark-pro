@@ -32,6 +32,7 @@
     "form-render": "^1.1.2",
     "html2canvas": "^1.0.0-rc.7",
     "moveable": "^0.24.6",
+    "pattern.css": "^1.0.0",
     "react-draggable": "^4.4.3",
     "react-rnd": "^10.2.4",
     "umi": "^3.4.11",
