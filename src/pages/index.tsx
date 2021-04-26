@@ -58,7 +58,7 @@ const schema = {
       type: 'number',
       widget: 'slider',
       default: 280,
-      min: 0,
+      min: 100,
       max: 560,
     },
     watermarkHeight: {
@@ -68,7 +68,7 @@ const schema = {
       type: 'number',
       widget: 'slider',
       default: 180,
-      min: 0,
+      min: 100,
       max: 360,
     },
   },
