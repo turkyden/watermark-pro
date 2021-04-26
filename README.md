@@ -33,3 +33,4 @@ $ yarn start
 - [react-rnd](https://github.com/bokuweb/react-rnd)
 - [watermark](https://github.com/pansyjs/react-components/tree/master/packages/watermark)
 - [pattern-css](https://bansal.io/pattern-css)
+- [jszip](https://github.com/Stuk/jszip)

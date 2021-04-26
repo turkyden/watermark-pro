@@ -8,12 +8,12 @@ import {
   GithubOutlined,
 } from '@ant-design/icons';
 import FormRender, { useForm } from 'form-render';
-import { Rnd } from 'react-rnd';
+import JSZip from 'jszip';
 import Draggable from 'react-draggable';
 import { useSize, useToggle } from 'ahooks';
 import { saveAs } from 'file-saver';
 import { Watermark } from '@/components';
-import DemoImg from '@/assets/watermark.jpg';
+import imageUrl from '@/assets/watermark.jpg';
 import '../../node_modules/pattern.css/dist/pattern.css';
 import './index.css';
 import { Scaler, useScaler } from './../components/scaler';
@@ -106,13 +106,16 @@ export default function IndexPage() {
   const [fileList, setFileList] = useState([
     {
       uid: '0',
-      name: 'image.png',
+      name: '水印示例.png',
       status: 'done',
-      url: DemoImg,
+      url: imageUrl,
+      originFileObj: '',
     },
   ]);
   const initalImage = fileList.length > 0 ? fileList[0].url : '';
+  const initalFilename = fileList.length > 0 ? fileList[0].name : '';
   const [previewImage, setPreviewImage] = useState(initalImage || '');
+  const [fileName, setFileName] = useState(initalFilename || '');
 
   const onPreview = async (file: any) => {
     if (!file) return;
@@ -120,6 +123,7 @@ export default function IndexPage() {
       file.preview = await getBase64(file.originFileObj);
     }
     setPreviewImage(file.url || file.preview);
+    setFileName(file.name);
   };
 
   const onChange = async ({ fileList }: any) => {
@@ -127,11 +131,23 @@ export default function IndexPage() {
     await onPreview(fileList[fileList.length - 1]);
   };
 
-  const onExport = async () => {
+  const onExport = () => {
     const canvasDOM = document.querySelector('canvas');
     if (canvasDOM) {
-      canvasDOM.toBlob((blob) => saveAs(blob, 'pretty image.png'));
+      canvasDOM.toBlob((blob) => saveAs(blob, fileName));
     }
+  };
+
+  const onExportAll = async () => {
+    const zip = new JSZip();
+    zip.file('Hello.txt', 'Hello World\n');
+    for (let index = 0; index < fileList.length; index++) {
+      const file = fileList[index];
+      const { name, originFileObj } = file;
+      zip.file(name, originFileObj);
+    }
+    const blob = await zip.generateAsync({ type: 'blob' });
+    saveAs(blob, 'watermark.zip');
   };
 
   return (
@@ -153,7 +169,10 @@ export default function IndexPage() {
         className="w-full relative bg-gray-200 text-gray-300 pattern-checks-sm flex flex-col justify-center items-center overflow-hidden"
         style={{ height: screenHeight - 128 }}
       >
-        <Watermark url={previewImage} options={options} scale={scale} />
+        <div style={{ transform: `scale(${scale / 100})` }}>
+          <div className="text-gray-800 text-xl pb-2 px-2">{fileName}</div>
+          <Watermark url={previewImage} options={options} />
+        </div>
         <Draggable
           position={guiPosition}
           onDrag={(e, { x, y }) => setGuiPosition({ x, y })}
@@ -189,6 +208,10 @@ export default function IndexPage() {
               <Button block type="primary" onClick={onExport}>
                 导出
               </Button>
+              <div className="py-2"></div>
+              <Button block type="ghost" onClick={onExportAll}>
+                批量导出 .zip
+              </Button>
             </div>
           </div>
         </Draggable>
@@ -200,7 +223,7 @@ export default function IndexPage() {
         />
       </section>
 
-      <section className="w-full h-34 p-4 overflow-auto bg-indigo-500 shadow">
+      <section className="w-full h-34 p-4 overflow-auto bg-gradient-to-r from-indigo-600 via-indigo-500 to-indigo-400 shadow">
         <Upload
           listType="picture-card"
           fileList={fileList}
