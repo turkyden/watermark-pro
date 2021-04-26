@@ -200,7 +200,7 @@ export default function IndexPage() {
         />
       </section>
 
-      <section className="w-full h-34 p-4 overflow-auto bg-indigo-400 shadow">
+      <section className="w-full h-34 p-4 overflow-auto bg-indigo-500 shadow">
         <Upload
           listType="picture-card"
           fileList={fileList}
@@ -390,7 +390,7 @@ export default function IndexPage() {
         </div>
       </section>
 
-      <section className="w-full">
+      <section className="w-full pb-32">
         <p className="text-center py-10">赞助作者，请他喝一杯咖啡吧！</p>
         <table class="border-collapse border-solid border gray-200 text-center m-auto">
           <thead>
@@ -412,166 +412,174 @@ export default function IndexPage() {
         </table>
       </section>
 
-      <footer className="text-gray-600 body-font">
+      <footer className="text-gray-600 body-font bg-gray-900">
         <div className="container px-5 py-24 mx-auto">
           <div className="flex flex-wrap md:text-left text-center -mb-10 -mx-4">
             <div className="lg:w-1/6 md:w-1/2 w-full px-4">
-              <h2 className="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">
-                CATEGORIES
+              <h2 className="title-font font-medium text-gray-300 tracking-widest text-lg mb-3">
+                实用工具
               </h2>
               <nav className="list-none mb-10">
                 <li>
-                  <a className="text-gray-600 hover:text-gray-800">
-                    First Link
+                  <a
+                    className="text-gray-300 hover:text-indigo-500 hover:underline"
+                    href="https://cli.im/"
+                    target="_blank"
+                  >
+                    草料二维码
                   </a>
                 </li>
                 <li>
-                  <a className="text-gray-600 hover:text-gray-800">
+                  <a className="text-gray-300 hover:text-indigo-500 hover:underline">
                     Second Link
                   </a>
                 </li>
                 <li>
-                  <a className="text-gray-600 hover:text-gray-800">
+                  <a className="text-gray-300 hover:text-indigo-500 hover:underline">
                     Third Link
                   </a>
                 </li>
                 <li>
-                  <a className="text-gray-600 hover:text-gray-800">
+                  <a className="text-gray-300 hover:text-indigo-500 hover:underline">
                     Fourth Link
                   </a>
                 </li>
               </nav>
             </div>
             <div className="lg:w-1/6 md:w-1/2 w-full px-4">
-              <h2 className="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">
-                CATEGORIES
+              <h2 className="title-font font-medium text-gray-300 tracking-widest text-lg mb-3">
+                设计酷站
               </h2>
               <nav className="list-none mb-10">
                 <li>
-                  <a className="text-gray-600 hover:text-gray-800">
-                    First Link
+                  <a
+                    className="text-gray-300 hover:text-indigo-500 hover:underline"
+                    href="https://www.zcool.com.cn/"
+                    target="_blank"
+                  >
+                    站酷
                   </a>
                 </li>
                 <li>
-                  <a className="text-gray-600 hover:text-gray-800">
+                  <a className="text-gray-300 hover:text-indigo-500 hover:underline">
                     Second Link
                   </a>
                 </li>
                 <li>
-                  <a className="text-gray-600 hover:text-gray-800">
+                  <a className="text-gray-300 hover:text-indigo-500 hover:underline">
                     Third Link
                   </a>
                 </li>
                 <li>
-                  <a className="text-gray-600 hover:text-gray-800">
+                  <a className="text-gray-300 hover:text-indigo-500 hover:underline">
                     Fourth Link
                   </a>
                 </li>
               </nav>
             </div>
             <div className="lg:w-1/6 md:w-1/2 w-full px-4">
-              <h2 className="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">
-                CATEGORIES
+              <h2 className="title-font font-medium text-gray-300 tracking-widest text-lg mb-3">
+                开源项目
               </h2>
               <nav className="list-none mb-10">
                 <li>
-                  <a className="text-gray-600 hover:text-gray-800">
+                  <a className="text-gray-300 hover:text-indigo-500 hover:underline">
                     First Link
                   </a>
                 </li>
                 <li>
-                  <a className="text-gray-600 hover:text-gray-800">
+                  <a className="text-gray-300 hover:text-indigo-500 hover:underline">
                     Second Link
                   </a>
                 </li>
                 <li>
-                  <a className="text-gray-600 hover:text-gray-800">
+                  <a className="text-gray-300 hover:text-indigo-500 hover:underline">
                     Third Link
                   </a>
                 </li>
                 <li>
-                  <a className="text-gray-600 hover:text-gray-800">
+                  <a className="text-gray-300 hover:text-indigo-500 hover:underline">
                     Fourth Link
                   </a>
                 </li>
               </nav>
             </div>
             <div className="lg:w-1/6 md:w-1/2 w-full px-4">
-              <h2 className="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">
-                CATEGORIES
+              <h2 className="title-font font-medium text-gray-300 tracking-widest text-lg mb-3">
+                友情链接
               </h2>
               <nav className="list-none mb-10">
                 <li>
-                  <a className="text-gray-600 hover:text-gray-800">
+                  <a className="text-gray-300 hover:text-indigo-500 hover:underline">
                     First Link
                   </a>
                 </li>
                 <li>
-                  <a className="text-gray-600 hover:text-gray-800">
+                  <a className="text-gray-300 hover:text-indigo-500 hover:underline">
                     Second Link
                   </a>
                 </li>
                 <li>
-                  <a className="text-gray-600 hover:text-gray-800">
+                  <a className="text-gray-300 hover:text-indigo-500 hover:underline">
                     Third Link
                   </a>
                 </li>
                 <li>
-                  <a className="text-gray-600 hover:text-gray-800">
+                  <a className="text-gray-300 hover:text-indigo-500 hover:underline">
                     Fourth Link
                   </a>
                 </li>
               </nav>
             </div>
             <div className="lg:w-1/6 md:w-1/2 w-full px-4">
-              <h2 className="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">
-                CATEGORIES
+              <h2 className="title-font font-medium text-gray-300 tracking-widest text-lg mb-3">
+                更多作品
               </h2>
               <nav className="list-none mb-10">
                 <li>
-                  <a className="text-gray-600 hover:text-gray-800">
+                  <a className="text-gray-300 hover:text-indigo-500 hover:underline">
                     First Link
                   </a>
                 </li>
                 <li>
-                  <a className="text-gray-600 hover:text-gray-800">
+                  <a className="text-gray-300 hover:text-indigo-500 hover:underline">
                     Second Link
                   </a>
                 </li>
                 <li>
-                  <a className="text-gray-600 hover:text-gray-800">
+                  <a className="text-gray-300 hover:text-indigo-500 hover:underline">
                     Third Link
                   </a>
                 </li>
                 <li>
-                  <a className="text-gray-600 hover:text-gray-800">
+                  <a className="text-gray-300 hover:text-indigo-500 hover:underline">
                     Fourth Link
                   </a>
                 </li>
               </nav>
             </div>
             <div className="lg:w-1/6 md:w-1/2 w-full px-4">
-              <h2 className="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">
+              <h2 className="title-font font-medium text-gray-300 tracking-widest text-lg mb-3">
                 CATEGORIES
               </h2>
               <nav className="list-none mb-10">
                 <li>
-                  <a className="text-gray-600 hover:text-gray-800">
+                  <a className="text-gray-300 hover:text-indigo-500 hover:underline">
                     First Link
                   </a>
                 </li>
                 <li>
-                  <a className="text-gray-600 hover:text-gray-800">
+                  <a className="text-gray-300 hover:text-indigo-500 hover:underline">
                     Second Link
                   </a>
                 </li>
                 <li>
-                  <a className="text-gray-600 hover:text-gray-800">
+                  <a className="text-gray-300 hover:text-indigo-500 hover:underline">
                     Third Link
                   </a>
                 </li>
                 <li>
-                  <a className="text-gray-600 hover:text-gray-800">
+                  <a className="text-gray-300 hover:text-indigo-500 hover:underline">
                     Fourth Link
                   </a>
                 </li>
@@ -585,18 +593,23 @@ export default function IndexPage() {
               <div className="relative sm:w-64 w-40 sm:mr-4 mr-2">
                 <label
                   htmlFor="footer-field"
-                  className="leading-7 text-sm text-gray-600"
+                  className="leading-7 text-sm text-gray-300"
                 >
-                  e-mail
+                  E-Mail
                 </label>
                 <input
                   type="text"
                   id="footer-field"
                   name="footer-field"
-                  className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:ring-2 focus:bg-transparent focus:ring-indigo-200 focus:border-indigo-500 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                  value="wj871287@gmail.com"
+                  readOnly
+                  className="w-full bg-opacity-50 rounded border border-gray-300 focus:ring-indigo-200 focus:border-indigo-500 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
                 />
               </div>
-              <button className="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">
+              <button
+                className="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded cursor-pointer"
+                onClick={() => window.open('https://github.com/Turkyden')}
+              >
                 联系我们
               </button>
             </div>
@@ -659,13 +672,13 @@ export default function IndexPage() {
             </span>
           </div>
         </div>
-        <div className="bg-gray-100">
+        <div className="bg-gray-800">
           <div className="container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row">
             <p className="text-gray-500 text-sm text-center sm:text-left">
               © 2020 Copyright —
               <a
-                href="https://twitter.com/knyttneve"
-                className="text-gray-600 ml-1"
+                href="https://github.com/Turkyden"
+                className="text-indigo-400 hover:text-indigo-500 ml-1 hover:underline"
                 target="_blank"
                 rel="noopener noreferrer"
               >

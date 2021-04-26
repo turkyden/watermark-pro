@@ -1,5 +1,16 @@
 # WaterMark Pro
 
+An online tools of generate watermark on your image.
+
+## ✨ Feather
+
+- [x] Grid System
+- [x] WaterMark
+- [x] Mosaic
+- [x] WaterMark Whole Page
+- [x] Multi File
+- [x] No Backend & Pure Frontend (Super Security)
+
 ## Getting Started
 
 Install dependencies,
@@ -20,12 +31,3 @@ $ yarn start
 - [react-rnd](https://github.com/bokuweb/react-rnd)
 - [watermark](https://github.com/pansyjs/react-components/tree/master/packages/watermark)
 - [pattern-css](https://bansal.io/pattern-css)
-
-## Feather
-
-- [x] Grid System
-- [x] WaterMark
-- [x] Mosaic
-- [x] WaterMark Whole Page
-- [x] Multi File
-- [x] No Backend & Pure Frontend (Super Security)
