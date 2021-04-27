@@ -57,7 +57,7 @@ const schema = {
       required: false,
       type: 'number',
       widget: 'slider',
-      default: 280,
+      default: 252,
       min: 100,
       max: 560,
     },
@@ -407,14 +407,20 @@ export default function IndexPage() {
             target="_blank"
             className="flex justify-center items-center w-32 text-center mx-auto mt-16 text-white bg-indigo-500 border-0 py-2 focus:outline-none hover:bg-indigo-600 rounded text-lg"
           >
-            <span className="pr-2">Resource</span>
             <GithubOutlined />
+            <span className="pl-2">Resource</span>
           </a>
         </div>
       </section>
 
       <section className="w-full pb-32">
-        <p className="text-center py-10">赞助作者，请他喝一杯咖啡吧！</p>
+        <h2 className="text-6xl text-center">☕</h2>
+        <p className="text-center py-2">
+          如果这个小工具对你<span className="text-2xl"> 有用</span>
+        </p>
+        <p className="text-center pb-10">
+          你可以赞助作者 or 请他喝一杯咖啡吧！
+        </p>
         <table class="border-collapse border-solid border gray-200 text-center m-auto">
           <thead>
             <tr>
