@@ -21,7 +21,7 @@ export default function Scaler({
 }) {
   return (
     <Draggable>
-      <div className="absolute z-50 bottom-4 right-4 shadow-lg rounded flex bg-gray-800">
+      <div className="absolute z-50 bottom-4 right-2/2 shadow-lg rounded flex bg-gray-800">
         <div
           className="px-2 py-2 select-none flex flex-col justify-center items-center"
           style={{ cursor: 'grab' }}

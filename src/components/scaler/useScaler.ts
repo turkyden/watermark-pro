@@ -1,6 +1,13 @@
 import { useEffect, useState } from 'react';
 
-export default function useScaler(initial: number) {
+export type Action = {
+  onZoomUp: () => void;
+  onZoomDown: () => void;
+  onReset: () => void;
+  onWheel: (event: WheelEvent) => void;
+};
+
+export default function useScaler(initial: number): [number, Action] {
   const [scale, setScale] = useState(initial);
 
   useEffect(() => {
@@ -52,7 +59,9 @@ export default function useScaler(initial: number) {
       onReset: () => setScale(initial),
       onWheel: (event: any) => {
         if (!event.ctrlKey) return;
-        //event.deltaY > 0 ? onZoomDown() : onZoomUp();
+        event.deltaY > 0
+          ? scale > 10 && setScale(scale - 5)
+          : setScale(scale + 5);
       },
     },
   ];

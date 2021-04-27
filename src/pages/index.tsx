@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Button, Drawer, Upload } from 'antd';
+import React, { useState, useReducer } from 'react';
+import { Button, Upload } from 'antd';
 import {
   PlusOutlined,
   CaretUpOutlined,
@@ -10,21 +10,23 @@ import {
 import FormRender, { useForm } from 'form-render';
 import JSZip from 'jszip';
 import Draggable from 'react-draggable';
-import { useSize, useToggle } from 'ahooks';
+import { useSize } from 'ahooks';
 import { saveAs } from 'file-saver';
 import { Watermark } from '@/components';
-import imageUrl from '@/assets/watermark.jpg';
+import initialImage from '@/assets/watermark.jpg';
 import '../../node_modules/pattern.css/dist/pattern.css';
 import './index.css';
 import { Scaler, useScaler } from './../components/scaler';
 import Weixin from '@/assets/weixin.png';
 import Alipay from '@/assets/alipay.png';
 
+import { getBase64 } from '@/untils';
+
 const schema = {
   type: 'object',
   properties: {
     text: {
-      title: '水印文案',
+      title: 'Text',
       readOnly: false,
       required: false,
       default: '仅用于办理住房公积金，他用无效。',
@@ -34,17 +36,17 @@ const schema = {
       type: 'string',
     },
     fontSize: {
-      title: '字体大小',
+      title: 'Font Size',
       readOnly: false,
       required: false,
       type: 'number',
       widget: 'slider',
-      default: 24,
+      default: 26,
       min: 12,
       max: 64,
     },
     fillStyle: {
-      title: '字体颜色',
+      title: 'Color',
       readOnly: false,
       required: false,
       type: 'string',
@@ -52,7 +54,7 @@ const schema = {
       default: '#000000',
     },
     watermarkWidth: {
-      title: '水印框宽度',
+      title: 'Width',
       readOnly: false,
       required: false,
       type: 'number',
@@ -62,7 +64,7 @@ const schema = {
       max: 560,
     },
     watermarkHeight: {
-      title: '水印框高度',
+      title: 'Height',
       readOnly: false,
       required: false,
       type: 'number',
@@ -84,22 +86,53 @@ const initalOptions = (() => {
   return defaultObj;
 })();
 
-const getBase64 = (file) => {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result);
-    reader.onerror = (error) => reject(error);
-  });
+const initialState = {
+  collapsed: true,
+  options: initalOptions,
+  fileList: [
+    {
+      uid: '0',
+      name: '水印示例.png',
+      status: 'done',
+      url: initialImage,
+      originFileObj: '',
+    },
+  ],
+  current: 0,
+  previewImage: initialImage,
+  fileName: '水印示例.png',
 };
 
+function reducer(state, action) {
+  switch (action.type) {
+    case 'COLLAPSE_GUI':
+      return {
+        ...state,
+        collapsed: !state.collapsed,
+      };
+      break;
+    case 'SET_OPTIONS':
+      return {
+        ...state,
+        options: action.payload,
+      };
+      break;
+    case 'SET_CURRENT':
+      return {
+        ...state,
+        options: action.payload,
+      };
+      break;
+    default:
+      throw new Error();
+  }
+}
+
 export default function IndexPage() {
-  const [guiPosition, setGuiPosition] = useState({ x: -16, y: 16 });
-  const [collapsed, { toggle: toggleCollapsed }] = useToggle(true);
-  const [options, setOptions] = useState(initalOptions);
+  const [{ collapsed, options }, dispatch] = useReducer(reducer, initialState);
   const form = useForm();
 
-  const [scale, { onWheel, onZoomUp, onZoomDown, onReset }] = useScaler(60);
+  const [scale, scaleAction] = useScaler(60);
 
   const { height: screenHeight = window.innerHeight } = useSize(document.body);
 
@@ -108,7 +141,7 @@ export default function IndexPage() {
       uid: '0',
       name: '水印示例.png',
       status: 'done',
-      url: imageUrl,
+      url: initialImage,
       originFileObj: '',
     },
   ]);
@@ -140,7 +173,30 @@ export default function IndexPage() {
 
   const onExportAll = async () => {
     const zip = new JSZip();
-    zip.file('Hello.txt', 'Hello World\n');
+    zip.file(
+      'LICENSE',
+      `MIT License
+
+    Copyright (c) 2021-present Turkyden
+
+    Permission is hereby granted, free of charge, to any person obtaining a copy
+    of this software and associated documentation files (the "Software"), to deal
+    in the Software without restriction, including without limitation the rights
+    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+    copies of the Software, and to permit persons to whom the Software is
+    furnished to do so, subject to the following conditions:
+
+    The above copyright notice and this permission notice shall be included in all
+    copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+    SOFTWARE.`,
+    );
     for (let index = 0; index < fileList.length; index++) {
       const file = fileList[index];
       const { name, originFileObj } = file;
@@ -148,13 +204,15 @@ export default function IndexPage() {
     }
     const blob = await zip.generateAsync({ type: 'blob' });
     saveAs(blob, 'watermark.zip');
+    console.log(fileList);
   };
 
   return (
-    <div className="w-full" onWheel={onWheel}>
-      <header className="fixed z-50 top-4 left-4 flex justify-start items-center content-center">
-        <div className="text-2xl font-normal pr-4 text-gray-800">
-          💦 WaterMark Pro
+    <div className="w-full">
+      <header className="fixed z-40 top-4 left-4 flex justify-start items-center content-center">
+        <div className="pr-4 text-gray-800 relative">
+          <div className="text-2xl font-semibold font-sans">WaterMark Pro</div>
+          <div className="w-16 h-4 bg-indigo-500 absolute left-0 -bottom-4"></div>
         </div>
         <a href="https://github.com/Turkyden/watermark-pro" target="_blank">
           <img
@@ -168,21 +226,18 @@ export default function IndexPage() {
       <section
         className="w-full relative bg-gray-200 text-gray-300 pattern-checks-sm flex flex-col justify-center items-center overflow-hidden"
         style={{ height: screenHeight - 128 }}
+        onWheel={scaleAction.onWheel}
       >
         <div style={{ transform: `scale(${scale / 100})` }}>
           <div className="text-gray-800 text-xl pb-2 px-2">{fileName}</div>
           <Watermark url={previewImage} options={options} />
         </div>
-        <Draggable
-          position={guiPosition}
-          onDrag={(e, { x, y }) => setGuiPosition({ x, y })}
-          handle=".handle"
-        >
+        <Draggable defaultPosition={{ x: -16, y: 16 }} handle=".handle">
           <div className="absolute z-50 top-0 right-0 w-64 px-4 bg-white rounded-xl shadow-lg">
             <div className="flex justify-between items-center py-2 text-gray-500">
               {React.createElement(
                 collapsed ? CaretDownOutlined : CaretUpOutlined,
-                { onClick: () => toggleCollapsed() },
+                { onClick: () => dispatch({ type: 'COLLAPSE_GUI' }) },
               )}
               <span className="handle | text-lg" style={{ cursor: 'grab' }}>
                 : : :
@@ -190,37 +245,57 @@ export default function IndexPage() {
               <SearchOutlined />
             </div>
             <div className={[collapsed ? 'block' : 'hidden', 'pb-4'].join(' ')}>
-              <div className="flex justify-center items-center py-2 text-gray-500">
-                <div className="text-lg pb-2">💦 WaterMark Pro</div>
+              <div className="flex justify-center items-center">
+                <div className="text-base pb-2 text-gray-600 font-semibold font-sans">
+                  💦 WaterMark Pro
+                </div>
               </div>
               <FormRender
                 form={form}
                 schema={schema}
                 watch={{
-                  '#': (v) => {
-                    setOptions({
-                      ...initalOptions,
-                      ...v,
-                    });
-                  },
+                  '#': (v) =>
+                    dispatch({
+                      type: 'SET_OPTIONS',
+                      payload: {
+                        ...initalOptions,
+                        ...v,
+                      },
+                    }),
                 }}
               />
               <Button block type="primary" onClick={onExport}>
                 导出
               </Button>
-              <div className="py-2"></div>
+              <div className="py-1"></div>
               <Button block type="ghost" onClick={onExportAll}>
                 批量导出 .zip
               </Button>
             </div>
           </div>
         </Draggable>
-        <Scaler
-          scale={scale}
-          onZoomUp={onZoomUp}
-          onZoomDown={onZoomDown}
-          onReset={onReset}
-        />
+        <Scaler scale={scale} {...scaleAction} />
+        <div className="absolute bottom-2 left-4">
+          <div className="flex items-center">
+            <div className="py px-4 bg-gray-800 bg-opacity-75 text-gray-200 rounded-sm">
+              Ctrl
+            </div>
+            <div className="py px-2 text-gray-800">+</div>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              width="24"
+              height="24"
+            >
+              <path fill="none" d="M0 0h24v24H0z" />
+              <path
+                fill="#4B5563"
+                d="M11.141 4c-1.582 0-2.387.169-3.128.565a3.453 3.453 0 0 0-1.448 1.448C6.169 6.753 6 7.559 6 9.14v5.718c0 1.582.169 2.387.565 3.128.337.63.818 1.111 1.448 1.448.74.396 1.546.565 3.128.565h1.718c1.582 0 2.387-.169 3.128-.565a3.453 3.453 0 0 0 1.448-1.448c.396-.74.565-1.546.565-3.128V9.14c0-1.582-.169-2.387-.565-3.128a3.453 3.453 0 0 0-1.448-1.448C15.247 4.169 14.441 4 12.86 4H11.14zm0-2h1.718c2.014 0 3.094.278 4.072.801a5.452 5.452 0 0 1 2.268 2.268c.523.978.801 2.058.801 4.072v5.718c0 2.014-.278 3.094-.801 4.072a5.452 5.452 0 0 1-2.268 2.268c-.978.523-2.058.801-4.072.801H11.14c-2.014 0-3.094-.278-4.072-.801a5.452 5.452 0 0 1-2.268-2.268C4.278 17.953 4 16.873 4 14.859V9.14c0-2.014.278-3.094.801-4.072A5.452 5.452 0 0 1 7.07 2.801C8.047 2.278 9.127 2 11.141 2zM11 6h2v5h-2V6z"
+              />
+            </svg>
+            <div className="text-gray-600 pl-4">画布缩放</div>
+          </div>
+        </div>
       </section>
 
       <section className="w-full h-34 p-4 overflow-auto bg-gradient-to-r from-indigo-600 via-indigo-500 to-indigo-400 shadow">
@@ -302,9 +377,9 @@ export default function IndexPage() {
                 <svg
                   fill="none"
                   stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="3"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="3"
                   className="text-indigo-500 w-6 h-6 flex-shrink-0 mr-4"
                   viewBox="0 0 24 24"
                 >
@@ -319,9 +394,9 @@ export default function IndexPage() {
                 <svg
                   fill="none"
                   stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="3"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="3"
                   className="text-indigo-500 w-6 h-6 flex-shrink-0 mr-4"
                   viewBox="0 0 24 24"
                 >
@@ -336,9 +411,9 @@ export default function IndexPage() {
                 <svg
                   fill="none"
                   stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="3"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="3"
                   className="text-indigo-500 w-6 h-6 flex-shrink-0 mr-4"
                   viewBox="0 0 24 24"
                 >
@@ -355,9 +430,9 @@ export default function IndexPage() {
                 <svg
                   fill="none"
                   stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="3"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="3"
                   className="text-indigo-500 w-6 h-6 flex-shrink-0 mr-4"
                   viewBox="0 0 24 24"
                 >
@@ -372,9 +447,9 @@ export default function IndexPage() {
                 <svg
                   fill="none"
                   stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="3"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="3"
                   className="text-indigo-500 w-6 h-6 flex-shrink-0 mr-4"
                   viewBox="0 0 24 24"
                 >
@@ -389,9 +464,9 @@ export default function IndexPage() {
                 <svg
                   fill="none"
                   stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="3"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="3"
                   className="text-indigo-500 w-6 h-6 flex-shrink-0 mr-4"
                   viewBox="0 0 24 24"
                 >
@@ -421,19 +496,19 @@ export default function IndexPage() {
         <p className="text-center pb-10">
           你可以赞助作者 or 请他喝一杯咖啡吧！
         </p>
-        <table class="border-collapse border-solid border gray-200 text-center m-auto">
+        <table className="border-collapse border-solid border gray-200 text-center m-auto">
           <thead>
             <tr>
-              <th class="border border-solid border-gray-200">微信</th>
-              <th class="border border-solid border-gray-200">支付宝</th>
+              <th className="border border-solid border-gray-200">微信</th>
+              <th className="border border-solid border-gray-200">支付宝</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td class="border border-solid border-gray-200">
+              <td className="border border-solid border-gray-200">
                 <img src={Weixin} width={150} alt="微信支付" />
               </td>
-              <td class="border border-solid border-gray-200">
+              <td className="border border-solid border-gray-200">
                 <img src={Alipay} width={140} alt="支付宝支付" />
               </td>
             </tr>
@@ -646,9 +721,9 @@ export default function IndexPage() {
               <a className="text-gray-500">
                 <svg
                   fill="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
                   className="w-5 h-5"
                   viewBox="0 0 24 24"
                 >
@@ -658,9 +733,9 @@ export default function IndexPage() {
               <a className="ml-3 text-gray-500">
                 <svg
                   fill="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
                   className="w-5 h-5"
                   viewBox="0 0 24 24"
                 >
@@ -671,9 +746,9 @@ export default function IndexPage() {
                 <svg
                   fill="none"
                   stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
                   className="w-5 h-5"
                   viewBox="0 0 24 24"
                 >
@@ -685,9 +760,9 @@ export default function IndexPage() {
                 <svg
                   fill="currentColor"
                   stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="0"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="0"
                   className="w-5 h-5"
                   viewBox="0 0 24 24"
                 >
