@@ -209,9 +209,10 @@ export default function IndexPage() {
 
   return (
     <div className="w-full">
-      <header className="fixed z-50 top-4 left-4 flex justify-start items-center content-center">
-        <div className="text-2xl font-normal pr-4 text-gray-800">
-          💦 WaterMark Pro
+      <header className="fixed z-40 top-4 left-4 flex justify-start items-center content-center">
+        <div className="pr-4 text-gray-800 relative">
+          <div className="text-2xl font-semibold font-sans">WaterMark Pro</div>
+          <div className="w-16 h-4 bg-indigo-500 absolute left-0 -bottom-4"></div>
         </div>
         <a href="https://github.com/Turkyden/watermark-pro" target="_blank">
           <img
@@ -244,8 +245,10 @@ export default function IndexPage() {
               <SearchOutlined />
             </div>
             <div className={[collapsed ? 'block' : 'hidden', 'pb-4'].join(' ')}>
-              <div className="flex justify-center items-center py-1 text-gray-500">
-                <div className="text-lg pb-2">💦 WaterMark Pro</div>
+              <div className="flex justify-center items-center">
+                <div className="text-base pb-2 text-gray-600 font-semibold font-sans">
+                  💦 WaterMark Pro
+                </div>
               </div>
               <FormRender
                 form={form}
@@ -274,7 +277,7 @@ export default function IndexPage() {
         <Scaler scale={scale} {...scaleAction} />
         <div className="absolute bottom-2 left-4">
           <div className="flex items-center">
-            <div className="py px-4 border-solid border-gray-600 border-2 text-gray-800 rounded-sm">
+            <div className="py px-4 bg-gray-800 bg-opacity-75 text-gray-200 rounded-sm">
               Ctrl
             </div>
             <div className="py px-2 text-gray-800">+</div>
