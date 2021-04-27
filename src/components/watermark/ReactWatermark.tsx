@@ -33,7 +33,7 @@ const ReactWatermark: React.FC<WatermarkProps> = ({
   return (
     <canvas
       ref={ref}
-      className="border-4 border-solid border-gray-300 hover:border-blue-500"
+      className="border-4 border-solid border-gray-300 hover:border-blue-500 shadow-2xl "
     />
   );
 };
