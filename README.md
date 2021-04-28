@@ -2,7 +2,7 @@ English | [简体中文](./README_cn-zh.md)
 
 <h1 align="center">WaterMark Pro</h1>
 
-<p align="center">💦 An online tools of generate watermark on your image. </p>
+<p align="center">💦 拒绝上传，一个开箱即用纯前端实现的水印生成工具。</p>
 
 <p align="center"><a href="https://watermark-pro.vercel.app" target="_blank">: : : Live Demo : : :</a></p>
 
@@ -37,6 +37,14 @@ $ yarn start
 - [watermark](https://github.com/pansyjs/react-components/tree/master/packages/watermark)
 - [pattern-css](https://bansal.io/pattern-css)
 - [jszip](https://github.com/Stuk/jszip)
+
+## ❓ Q&A
+
+加入微信交流群，尽情的享受开源吧！
+
+| 微信交流群 |
+| --------- |
+| <img width="300" src="./weixin_group.jpg"> |
 
 ## License
 
