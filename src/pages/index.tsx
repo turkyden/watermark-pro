@@ -221,11 +221,10 @@ export default function IndexPage() {
   return (
     <div className="w-full">
       <header className="fixed z-40 top-4 left-4 flex justify-start items-center content-center">
-        <div className="pr-4 text-gray-800 relative">
-          <div className="relative text-2xl font-semibold font-sans z-50">
+        <div className="pr-4 text-gray-800">
+          <div className="text-2xl font-semibold font-sans z-50">
             WaterMark Pro
           </div>
-          <div className="w-44 h-4 absolute left-0 -bottom-1 bg-gradient-to-r from-indigo-600 via-indigo-500 to-indigo-400"></div>
         </div>
         <a href="https://github.com/Turkyden/watermark-pro" target="_blank">
           <img
@@ -556,17 +555,29 @@ export default function IndexPage() {
                   </a>
                 </li>
                 <li>
-                  <a className="text-gray-300 hover:text-indigo-500 hover:underline">
+                  <a
+                    className="text-gray-300 hover:text-indigo-500 hover:underline"
+                    href=""
+                    target="_blank"
+                  >
                     Second Link
                   </a>
                 </li>
                 <li>
-                  <a className="text-gray-300 hover:text-indigo-500 hover:underline">
+                  <a
+                    className="text-gray-300 hover:text-indigo-500 hover:underline"
+                    href=""
+                    target="_blank"
+                  >
                     Third Link
                   </a>
                 </li>
                 <li>
-                  <a className="text-gray-300 hover:text-indigo-500 hover:underline">
+                  <a
+                    className="text-gray-300 hover:text-indigo-500 hover:underline"
+                    href=""
+                    target="_blank"
+                  >
                     Fourth Link
                   </a>
                 </li>
@@ -587,17 +598,29 @@ export default function IndexPage() {
                   </a>
                 </li>
                 <li>
-                  <a className="text-gray-300 hover:text-indigo-500 hover:underline">
+                  <a
+                    className="text-gray-300 hover:text-indigo-500 hover:underline"
+                    href=""
+                    target="_blank"
+                  >
                     Second Link
                   </a>
                 </li>
                 <li>
-                  <a className="text-gray-300 hover:text-indigo-500 hover:underline">
+                  <a
+                    className="text-gray-300 hover:text-indigo-500 hover:underline"
+                    href=""
+                    target="_blank"
+                  >
                     Third Link
                   </a>
                 </li>
                 <li>
-                  <a className="text-gray-300 hover:text-indigo-500 hover:underline">
+                  <a
+                    className="text-gray-300 hover:text-indigo-500 hover:underline"
+                    href=""
+                    target="_blank"
+                  >
                     Fourth Link
                   </a>
                 </li>
@@ -609,22 +632,38 @@ export default function IndexPage() {
               </h2>
               <nav className="list-none mb-10">
                 <li>
-                  <a className="text-gray-300 hover:text-indigo-500 hover:underline">
-                    First Link
+                  <a
+                    className="text-gray-300 hover:text-indigo-500 hover:underline"
+                    href="https://tailblocks.cc/"
+                    target="_blank"
+                  >
+                    Tailblocks
                   </a>
                 </li>
                 <li>
-                  <a className="text-gray-300 hover:text-indigo-500 hover:underline">
-                    Second Link
+                  <a
+                    className="text-gray-300 hover:text-indigo-500 hover:underline"
+                    href="https://tailblocks.cc/"
+                    target="_blank"
+                  >
+                    Ant Design
                   </a>
                 </li>
                 <li>
-                  <a className="text-gray-300 hover:text-indigo-500 hover:underline">
+                  <a
+                    className="text-gray-300 hover:text-indigo-500 hover:underline"
+                    href=""
+                    target="_blank"
+                  >
                     Third Link
                   </a>
                 </li>
                 <li>
-                  <a className="text-gray-300 hover:text-indigo-500 hover:underline">
+                  <a
+                    className="text-gray-300 hover:text-indigo-500 hover:underline"
+                    href=""
+                    target="_blank"
+                  >
                     Fourth Link
                   </a>
                 </li>
@@ -636,22 +675,38 @@ export default function IndexPage() {
               </h2>
               <nav className="list-none mb-10">
                 <li>
-                  <a className="text-gray-300 hover:text-indigo-500 hover:underline">
-                    First Link
+                  <a
+                    className="text-gray-300 hover:text-indigo-500 hover:underline"
+                    href="http://h5.dooring.cn/"
+                    target="_blank"
+                  >
+                    H5 Dooring
                   </a>
                 </li>
                 <li>
-                  <a className="text-gray-300 hover:text-indigo-500 hover:underline">
+                  <a
+                    className="text-gray-300 hover:text-indigo-500 hover:underline"
+                    href=""
+                    target="_blank"
+                  >
                     Second Link
                   </a>
                 </li>
                 <li>
-                  <a className="text-gray-300 hover:text-indigo-500 hover:underline">
+                  <a
+                    className="text-gray-300 hover:text-indigo-500 hover:underline"
+                    href=""
+                    target="_blank"
+                  >
                     Third Link
                   </a>
                 </li>
                 <li>
-                  <a className="text-gray-300 hover:text-indigo-500 hover:underline">
+                  <a
+                    className="text-gray-300 hover:text-indigo-500 hover:underline"
+                    href=""
+                    target="_blank"
+                  >
                     Fourth Link
                   </a>
                 </li>
@@ -663,22 +718,38 @@ export default function IndexPage() {
               </h2>
               <nav className="list-none mb-10">
                 <li>
-                  <a className="text-gray-300 hover:text-indigo-500 hover:underline">
+                  <a
+                    className="text-gray-300 hover:text-indigo-500 hover:underline"
+                    href=""
+                    target="_blank"
+                  >
                     First Link
                   </a>
                 </li>
                 <li>
-                  <a className="text-gray-300 hover:text-indigo-500 hover:underline">
+                  <a
+                    className="text-gray-300 hover:text-indigo-500 hover:underline"
+                    href=""
+                    target="_blank"
+                  >
                     Second Link
                   </a>
                 </li>
                 <li>
-                  <a className="text-gray-300 hover:text-indigo-500 hover:underline">
+                  <a
+                    className="text-gray-300 hover:text-indigo-500 hover:underline"
+                    href=""
+                    target="_blank"
+                  >
                     Third Link
                   </a>
                 </li>
                 <li>
-                  <a className="text-gray-300 hover:text-indigo-500 hover:underline">
+                  <a
+                    className="text-gray-300 hover:text-indigo-500 hover:underline"
+                    href=""
+                    target="_blank"
+                  >
                     Fourth Link
                   </a>
                 </li>
@@ -690,22 +761,38 @@ export default function IndexPage() {
               </h2>
               <nav className="list-none mb-10">
                 <li>
-                  <a className="text-gray-300 hover:text-indigo-500 hover:underline">
+                  <a
+                    className="text-gray-300 hover:text-indigo-500 hover:underline"
+                    href=""
+                    target="_blank"
+                  >
                     First Link
                   </a>
                 </li>
                 <li>
-                  <a className="text-gray-300 hover:text-indigo-500 hover:underline">
+                  <a
+                    className="text-gray-300 hover:text-indigo-500 hover:underline"
+                    href=""
+                    target="_blank"
+                  >
                     Second Link
                   </a>
                 </li>
                 <li>
-                  <a className="text-gray-300 hover:text-indigo-500 hover:underline">
+                  <a
+                    className="text-gray-300 hover:text-indigo-500 hover:underline"
+                    href=""
+                    target="_blank"
+                  >
                     Third Link
                   </a>
                 </li>
                 <li>
-                  <a className="text-gray-300 hover:text-indigo-500 hover:underline">
+                  <a
+                    className="text-gray-300 hover:text-indigo-500 hover:underline"
+                    href=""
+                    target="_blank"
+                  >
                     Fourth Link
                   </a>
                 </li>
