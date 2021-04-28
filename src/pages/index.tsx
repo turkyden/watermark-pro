@@ -6,6 +6,7 @@ import {
   CaretDownOutlined,
   SearchOutlined,
   GithubOutlined,
+  ArrowDownOutlined,
 } from '@ant-design/icons';
 import FormRender, { useForm } from 'form-render';
 import JSZip from 'jszip';
@@ -211,11 +212,14 @@ export default function IndexPage() {
     <div className="w-full">
       <header className="fixed z-40 top-4 left-4 flex justify-start items-center content-center">
         <div className="pr-4 text-gray-800 relative">
-          <div className="text-2xl font-semibold font-sans">WaterMark Pro</div>
-          <div className="w-16 h-4 bg-indigo-500 absolute left-0 -bottom-4"></div>
+          <div className="relative text-2xl font-semibold font-sans z-50">
+            WaterMark Pro
+          </div>
+          <div className="w-44 h-4 absolute left-0 -bottom-1 bg-gradient-to-r from-indigo-600 via-indigo-500 to-indigo-400"></div>
         </div>
         <a href="https://github.com/Turkyden/watermark-pro" target="_blank">
           <img
+            className="w-24"
             alt="GitHub Repo stars"
             src="https://img.shields.io/github/stars/Turkyden/watermark-pro?style=social"
           />
@@ -233,7 +237,7 @@ export default function IndexPage() {
           <Watermark url={previewImage} options={options} />
         </div>
         <Draggable defaultPosition={{ x: -16, y: 16 }} handle=".handle">
-          <div className="absolute z-50 top-0 right-0 w-64 px-4 bg-white rounded-xl shadow-lg">
+          <div className="absolute z-50 top-0 right-0 w-64 px-4 bg-white rounded-md shadow-lg">
             <div className="flex justify-between items-center py-2 text-gray-500">
               {React.createElement(
                 collapsed ? CaretDownOutlined : CaretUpOutlined,
@@ -264,7 +268,12 @@ export default function IndexPage() {
                     }),
                 }}
               />
-              <Button block type="primary" onClick={onExport}>
+              <Button
+                block
+                type="primary"
+                className="bg-gradient-to-r from-indigo-600 via-indigo-500 to-indigo-400"
+                onClick={onExport}
+              >
                 导出
               </Button>
               <div className="py-1"></div>
@@ -312,6 +321,9 @@ export default function IndexPage() {
             </div>
           )}
         </Upload>
+        <div className="animate-bounce w-full absolute bottom-2 left-0 text-center">
+          <ArrowDownOutlined className="text-2xl" />
+        </div>
       </section>
 
       {/* feather */}
@@ -517,7 +529,7 @@ export default function IndexPage() {
       </section>
 
       <footer className="text-gray-600 body-font bg-gray-900">
-        <div className="container px-5 py-24 mx-auto">
+        <div className="container px-5 pt-16 pb-24 mx-auto">
           <div className="flex flex-wrap md:text-left text-center -mb-10 -mx-4">
             <div className="lg:w-1/6 md:w-1/2 w-full px-4">
               <h2 className="title-font font-medium text-gray-300 tracking-widest text-lg mb-3">
@@ -691,107 +703,21 @@ export default function IndexPage() {
             </div>
           </div>
         </div>
-        <div className="border-t border-gray-200">
-          <div className="container px-5 py-8 flex flex-wrap mx-auto items-center">
-            <div className="flex md:flex-nowrap flex-wrap justify-center items-end md:justify-start">
-              <div className="relative sm:w-64 w-40 sm:mr-4 mr-2">
-                <label
-                  htmlFor="footer-field"
-                  className="leading-7 text-sm text-gray-300"
-                >
-                  E-Mail
-                </label>
-                <input
-                  type="text"
-                  id="footer-field"
-                  name="footer-field"
-                  value="wj871287@gmail.com"
-                  readOnly
-                  className="w-full bg-opacity-50 rounded border border-gray-300 focus:ring-indigo-200 focus:border-indigo-500 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-                />
-              </div>
-              <button
-                className="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded cursor-pointer"
-                onClick={() => window.open('https://github.com/Turkyden')}
-              >
-                联系我们
-              </button>
-            </div>
-            <span className="inline-flex lg:ml-auto lg:mt-0 mt-6 w-full justify-center md:justify-start md:w-auto">
-              <a className="text-gray-500">
-                <svg
-                  fill="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  className="w-5 h-5"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
-                </svg>
-              </a>
-              <a className="ml-3 text-gray-500">
-                <svg
-                  fill="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  className="w-5 h-5"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"></path>
-                </svg>
-              </a>
-              <a className="ml-3 text-gray-500">
-                <svg
-                  fill="none"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  className="w-5 h-5"
-                  viewBox="0 0 24 24"
-                >
-                  <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
-                  <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path>
-                </svg>
-              </a>
-              <a className="ml-3 text-gray-500">
-                <svg
-                  fill="currentColor"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="0"
-                  className="w-5 h-5"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke="none"
-                    d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"
-                  ></path>
-                  <circle cx="4" cy="4" r="2" stroke="none"></circle>
-                </svg>
-              </a>
-            </span>
-          </div>
-        </div>
         <div className="bg-gray-800">
-          <div className="container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row">
-            <p className="text-gray-500 text-sm text-center sm:text-left">
-              © 2020 Copyright —
-              <a
-                href="https://github.com/Turkyden"
-                className="text-indigo-400 hover:text-indigo-500 ml-1 hover:underline"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                @Turkyden
-              </a>
+          <div className="container mx-auto py-4 px-5 flex justify-center items-center">
+            <p className="text-gray-500 text-sm text-center sm:text-center">
+              <span className="pl-4">
+                MIT & Created with 💜 By
+                <a
+                  href="https://github.com/Turkyden"
+                  className="text-gray-400 hover:text-indigo-400 ml-1 hover:underline"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  @Turkyden
+                </a>
+              </span>
             </p>
-            <span className="sm:ml-auto sm:mt-0 mt-2 sm:w-auto w-full sm:text-left text-center text-gray-500 text-sm">
-              Created with 💜 <b>MIT</b>
-            </span>
           </div>
         </div>
       </footer>
