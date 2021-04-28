@@ -20,15 +20,15 @@ export default function Scaler({
   onReset: () => void;
 }) {
   return (
-    <Draggable>
+    <Draggable handle=".scaler-handle">
       <div className="absolute z-50 bottom-4 right-2/2 shadow-lg rounded flex bg-gray-800">
         <div
-          className="px-2 py-2 select-none flex flex-col justify-center items-center"
+          className="scaler-handle | px-2 py-2 select-none flex flex-col justify-center items-center"
           style={{ cursor: 'grab' }}
         >
           <svg
             className="octicon octicon-grabber"
-            fill="#fff"
+            fill="#6B7280"
             height="16"
             viewBox="0 0 16 16"
             version="1.1"

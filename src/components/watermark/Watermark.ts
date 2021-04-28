@@ -24,6 +24,7 @@ interface Options {
   fillStyle: string;
   watermarkWidth: number;
   watermarkHeight: number;
+  rotate: number;
 }
 
 class Watermark {
@@ -39,6 +40,7 @@ class Watermark {
     fillStyle: 'rgba(100, 100, 100, 0.4)',
     watermarkWidth: 280,
     watermarkHeight: 180,
+    rotate: 20,
   };
 
   constructor(canvas, opt = {}) {
@@ -58,8 +60,8 @@ class Watermark {
       fillStyle,
       watermarkWidth,
       watermarkHeight,
+      rotate,
     } = userOptions;
-    const rotate = 20;
     const wctx = cw.getContext('2d');
     //清除小画布
     // wctx.clearRect(0, 0, cw.width, cw.height);

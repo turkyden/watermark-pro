@@ -1,4 +1,4 @@
-import { useEffect, useRef, useCallback } from 'react';
+import { useEffect, useRef } from 'react';
 import Watermark from './Watermark';
 interface Options {
   text: string;
@@ -6,6 +6,7 @@ interface Options {
   fillStyle: string;
   watermarkWidth: number;
   watermarkHeight: number;
+  rotate: number;
 }
 
 interface WatermarkProps {
