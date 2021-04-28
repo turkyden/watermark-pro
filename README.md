@@ -38,6 +38,12 @@ $ yarn start
 - [pattern-css](https://bansal.io/pattern-css)
 - [jszip](https://github.com/Stuk/jszip)
 
+## ❓ Q&A
+
+| 微信交流群 |
+| --------- |
+| ![Watermark Pro 微信交流群](./weixin_group.jpg) |
+
 ## License
 
 [MIT](./LICENSE)
