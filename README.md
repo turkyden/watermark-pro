@@ -42,7 +42,7 @@ $ yarn start
 
 加入微信交流群，尽情的享受开源吧！
 
-<img width="100" src="./weixin_group.jpg">
+<img width="300" src="./weixin_group.jpg">
 
 ## License
 
