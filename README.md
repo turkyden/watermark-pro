@@ -2,7 +2,7 @@ English | [简体中文](./README_cn-zh.md)
 
 <h1 align="center">WaterMark Pro</h1>
 
-<p align="center">💦 Forbidden to upload, an online tool for generating watermark. </p>
+<p align="center">💦 拒绝上传，一个开箱即用纯前端实现的水印生成工具。</p>
 
 <p align="center"><a href="https://watermark-pro.vercel.app" target="_blank">: : : Live Demo : : :</a></p>
 
