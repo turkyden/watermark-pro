@@ -560,6 +560,15 @@ export default function IndexPage() {
                 <li>
                   <a
                     className="text-gray-300 hover:text-indigo-500 hover:underline"
+                    href=""
+                    target="_blank"
+                  >
+                    Iconfont 图标库
+                  </a>
+                </li>
+                <li>
+                  <a
+                    className="text-gray-300 hover:text-indigo-500 hover:underline"
                     href="https://cli.im/"
                     target="_blank"
                   >
@@ -572,16 +581,7 @@ export default function IndexPage() {
                     href=""
                     target="_blank"
                   >
-                    Second Link
-                  </a>
-                </li>
-                <li>
-                  <a
-                    className="text-gray-300 hover:text-indigo-500 hover:underline"
-                    href=""
-                    target="_blank"
-                  >
-                    Third Link
+                    美图秀秀
                   </a>
                 </li>
                 <li>
@@ -615,7 +615,7 @@ export default function IndexPage() {
                     href=""
                     target="_blank"
                   >
-                    Second Link
+                    UI 中国
                   </a>
                 </li>
                 <li>
@@ -624,7 +624,7 @@ export default function IndexPage() {
                     href=""
                     target="_blank"
                   >
-                    Third Link
+                    优设网
                   </a>
                 </li>
                 <li>
@@ -633,7 +633,16 @@ export default function IndexPage() {
                     href=""
                     target="_blank"
                   >
-                    Fourth Link
+                    Dribbble
+                  </a>
+                </li>
+                <li>
+                  <a
+                    className="text-gray-300 hover:text-indigo-500 hover:underline"
+                    href=""
+                    target="_blank"
+                  >
+                    Belance
                   </a>
                 </li>
               </nav>
@@ -649,7 +658,7 @@ export default function IndexPage() {
                     href="https://tailblocks.cc/"
                     target="_blank"
                   >
-                    Tailblocks
+                    TailwindCSS
                   </a>
                 </li>
                 <li>
@@ -667,7 +676,7 @@ export default function IndexPage() {
                     href=""
                     target="_blank"
                   >
-                    Third Link
+                    X-Render
                   </a>
                 </li>
                 <li>
@@ -676,7 +685,7 @@ export default function IndexPage() {
                     href=""
                     target="_blank"
                   >
-                    Fourth Link
+                    React-Dnd
                   </a>
                 </li>
               </nav>
@@ -701,7 +710,7 @@ export default function IndexPage() {
                     href=""
                     target="_blank"
                   >
-                    Second Link
+                    PC Dooring
                   </a>
                 </li>
                 <li>
@@ -710,7 +719,7 @@ export default function IndexPage() {
                     href=""
                     target="_blank"
                   >
-                    Third Link
+                    趣学前端
                   </a>
                 </li>
                 <li>
