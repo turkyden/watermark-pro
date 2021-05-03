@@ -1,4 +1,4 @@
-import React, { useState, useReducer } from 'react';
+import React, { useState, useReducer, useMemo, useCallback } from 'react';
 import { Button, Upload } from 'antd';
 import {
   PlusOutlined,
@@ -156,25 +156,37 @@ export default function IndexPage() {
       url: initialImage,
       preview: initialImage,
       originFileObj: initialImage,
+      thumbUrl: initialImage,
     },
   ]);
-  const initalImage = fileList.length > 0 ? fileList[0].url : '';
-  const initalFilename = fileList.length > 0 ? fileList[0].name : '';
-  const [previewImage, setPreviewImage] = useState(initalImage || '');
-  const [fileName, setFileName] = useState(initalFilename || '');
 
-  const onPreview = async (file: any) => {
-    if (!file) return;
-    if (!file.url && !file.preview) {
+  const [selected, setSeleted] = useState('0');
+
+  const { fileName, previewImage } = useMemo(() => {
+    const selectedFile = fileList.find((value) => value.uid === selected);
+    return {
+      fileName: selectedFile ? selectedFile.name : '未命名',
+      previewImage: selectedFile ? selectedFile.preview : '',
+    };
+  }, [fileList, selected]);
+
+  const onPreview = (file: any) => setSeleted(file.uid);
+
+  const onChange = async ({ file, fileList: currentFileList }) => {
+    const isRemove = currentFileList < fileList;
+    if (isRemove) {
+      const lastFile = currentFileList[currentFileList.length - 1];
+      setSeleted(lastFile.uid);
+      setFileList(currentFileList);
+    } else {
       file.preview = await getBase64(file.originFileObj);
+      setSeleted(file.uid);
+      setFileList(
+        currentFileList.map((v: any) => {
+          return v.uid === file.uid ? file : v;
+        }),
+      );
     }
-    setPreviewImage(file.url || file.preview);
-    setFileName(file.name);
-  };
-
-  const onChange = async ({ fileList }: any) => {
-    setFileList(fileList);
-    await onPreview(fileList[fileList.length - 1]);
   };
 
   const onExport = () => {
@@ -251,7 +263,6 @@ export default function IndexPage() {
         </a>
       </header>
 
-      {/* hero */}
       <section
         className="w-full relative bg-gray-200 text-gray-300 pattern-checks-sm flex flex-col justify-center items-center overflow-hidden"
         style={{ height: screenHeight - 128 }}
@@ -564,6 +575,15 @@ export default function IndexPage() {
                 <li>
                   <a
                     className="text-gray-300 hover:text-indigo-500 hover:underline"
+                    href=""
+                    target="_blank"
+                  >
+                    Iconfont 图标库
+                  </a>
+                </li>
+                <li>
+                  <a
+                    className="text-gray-300 hover:text-indigo-500 hover:underline"
                     href="https://cli.im/"
                     target="_blank"
                   >
@@ -576,16 +596,7 @@ export default function IndexPage() {
                     href=""
                     target="_blank"
                   >
-                    Second Link
-                  </a>
-                </li>
-                <li>
-                  <a
-                    className="text-gray-300 hover:text-indigo-500 hover:underline"
-                    href=""
-                    target="_blank"
-                  >
-                    Third Link
+                    美图秀秀
                   </a>
                 </li>
                 <li>
@@ -619,7 +630,7 @@ export default function IndexPage() {
                     href=""
                     target="_blank"
                   >
-                    Second Link
+                    UI 中国
                   </a>
                 </li>
                 <li>
@@ -628,7 +639,7 @@ export default function IndexPage() {
                     href=""
                     target="_blank"
                   >
-                    Third Link
+                    优设网
                   </a>
                 </li>
                 <li>
@@ -637,7 +648,16 @@ export default function IndexPage() {
                     href=""
                     target="_blank"
                   >
-                    Fourth Link
+                    Dribbble
+                  </a>
+                </li>
+                <li>
+                  <a
+                    className="text-gray-300 hover:text-indigo-500 hover:underline"
+                    href=""
+                    target="_blank"
+                  >
+                    Belance
                   </a>
                 </li>
               </nav>
@@ -653,7 +673,7 @@ export default function IndexPage() {
                     href="https://tailblocks.cc/"
                     target="_blank"
                   >
-                    Tailblocks
+                    TailwindCSS
                   </a>
                 </li>
                 <li>
@@ -671,7 +691,7 @@ export default function IndexPage() {
                     href=""
                     target="_blank"
                   >
-                    Third Link
+                    X-Render
                   </a>
                 </li>
                 <li>
@@ -680,7 +700,7 @@ export default function IndexPage() {
                     href=""
                     target="_blank"
                   >
-                    Fourth Link
+                    React-Dnd
                   </a>
                 </li>
               </nav>
@@ -705,7 +725,7 @@ export default function IndexPage() {
                     href=""
                     target="_blank"
                   >
-                    Second Link
+                    PC Dooring
                   </a>
                 </li>
                 <li>
@@ -714,7 +734,7 @@ export default function IndexPage() {
                     href=""
                     target="_blank"
                   >
-                    Third Link
+                    趣学前端
                   </a>
                 </li>
                 <li>
