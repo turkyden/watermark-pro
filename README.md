@@ -44,7 +44,7 @@ $ yarn start
 
 | 微信交流群 |
 | --------- |
-| <img width="300" src="./weixin_group.jpg"> |
+| <img width="300" src="./src/assets/weixin_group.jpg"> |
 
 ## License
 
