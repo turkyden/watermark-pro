@@ -106,6 +106,7 @@ const initialState = {
       name: '水印示例.png',
       status: 'done',
       url: initialImage,
+      preview: initialImage,
       originFileObj: '',
     },
   ],
@@ -131,7 +132,7 @@ function reducer(state, action) {
     case 'SET_CURRENT':
       return {
         ...state,
-        options: action.payload,
+        current: action.payload,
       };
       break;
     default:
@@ -153,7 +154,8 @@ export default function IndexPage() {
       name: '水印示例.png',
       status: 'done',
       url: initialImage,
-      originFileObj: '',
+      preview: initialImage,
+      originFileObj: initialImage,
     },
   ]);
   const initalImage = fileList.length > 0 ? fileList[0].url : '';
@@ -208,10 +210,24 @@ export default function IndexPage() {
     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
     SOFTWARE.`,
     );
+    const renderCanvas = (ms: number = 1000) => {
+      return new Promise<Blob>((resolve, reject) => {
+        window.setTimeout(() => {
+          const canvasDOM = document.querySelector('canvas');
+          if (canvasDOM) {
+            canvasDOM.toBlob((blob) => resolve(blob));
+          } else {
+            reject('error: render');
+          }
+        }, ms);
+      });
+    };
     for (let index = 0; index < fileList.length; index++) {
       const file = fileList[index];
-      const { name, originFileObj } = file;
-      zip.file(name, originFileObj);
+      const { name, preview } = file;
+      setPreviewImage(preview);
+      const imgBlob = await renderCanvas();
+      zip.file(name, imgBlob);
     }
     const blob = await zip.generateAsync({ type: 'blob' });
     saveAs(blob, 'watermark.zip');

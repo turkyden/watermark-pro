@@ -6,7 +6,7 @@ English | [简体中文](./README_cn-zh.md)
 
 <p align="center"><a href="https://watermark-pro.vercel.app" target="_blank">: : : Live Demo : : :</a></p>
 
-![watermark pro](./screenshot.png)
+![watermark pro](./src/assets/screenshot.png)
 ## ✨ Feather
 
 - [x] Grid System
