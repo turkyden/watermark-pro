@@ -236,8 +236,7 @@ export default function IndexPage() {
     };
     for (let index = 0; index < fileList.length; index++) {
       const file = fileList[index];
-      const { name, preview } = file;
-      setPreviewImage(preview);
+      const { name } = file;
       const imgBlob = await renderCanvas();
       zip.file(name, imgBlob);
     }
