@@ -9,6 +9,8 @@ English | [简体中文](./README_cn-zh.md)
 ![watermark pro](./src/assets/screenshot.png)
 ## ✨ Feather
 
+- [ ] Mobile Weixin APP (微信小程序)
+- [ ] Electron Desktop App （桌面版）
 - [x] Grid System
 - [x] WaterMark
 - [x] Mosaic
