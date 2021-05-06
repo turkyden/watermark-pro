@@ -166,7 +166,9 @@ export default function IndexPage() {
     const selectedFile = fileList.find((value) => value.uid === selected);
     return {
       fileName: selectedFile ? selectedFile.name : '未命名',
-      previewImage: selectedFile ? selectedFile.preview : '',
+      previewImage: selectedFile
+        ? selectedFile.preview
+        : 'https://jdc.jd.com/img/1200x800',
     };
   }, [fileList, selected]);
 
@@ -175,6 +177,11 @@ export default function IndexPage() {
   const onChange = async ({ file, fileList: currentFileList }) => {
     const isRemove = currentFileList < fileList;
     if (isRemove) {
+      if (currentFileList.length === 0) {
+        setSeleted('-1');
+        setFileList([]);
+        return false;
+      }
       const lastFile = currentFileList[currentFileList.length - 1];
       setSeleted(lastFile.uid);
       setFileList(currentFileList);
@@ -241,8 +248,7 @@ export default function IndexPage() {
       zip.file(name, imgBlob);
     }
     const blob = await zip.generateAsync({ type: 'blob' });
-    saveAs(blob, 'watermark.zip');
-    console.log(fileList);
+    saveAs(blob, `watermark_${new Date().getTime()}.zip`);
   };
 
   return (
@@ -357,11 +363,18 @@ export default function IndexPage() {
           )}
         </Upload>
         <div className="animate-bounce w-full absolute bottom-2 left-0 text-center">
-          <ArrowDownOutlined className="text-2xl" />
+          <ArrowDownOutlined
+            className="text-2xl"
+            onClick={() =>
+              window.scrollTo({
+                top: window.outerHeight,
+                behavior: 'smooth',
+              })
+            }
+          />
         </div>
       </section>
 
-      {/* feather */}
       <section className="text-gray-600 body-font">
         <div className="container px-5 py-24 mx-auto">
           <div className="xl:w-1/2 lg:w-3/4 w-full mx-auto text-center">
@@ -374,29 +387,232 @@ export default function IndexPage() {
               <path d="M925.036 57.197h-304c-27.6 0-50 22.4-50 50v304c0 27.601 22.4 50 50 50h145.5c-1.9 79.601-20.4 143.3-55.4 191.2-27.6 37.8-69.399 69.1-125.3 93.8-25.7 11.3-36.8 41.7-24.8 67.101l36 76c11.6 24.399 40.3 35.1 65.1 24.399 66.2-28.6 122.101-64.8 167.7-108.8 55.601-53.7 93.7-114.3 114.3-181.9 20.601-67.6 30.9-159.8 30.9-276.8v-239c0-27.599-22.401-50-50-50zM106.036 913.497c65.4-28.5 121-64.699 166.9-108.6 56.1-53.7 94.4-114.1 115-181.2 20.6-67.1 30.899-159.6 30.899-277.5v-239c0-27.6-22.399-50-50-50h-304c-27.6 0-50 22.4-50 50v304c0 27.601 22.4 50 50 50h145.5c-1.9 79.601-20.4 143.3-55.4 191.2-27.6 37.8-69.4 69.1-125.3 93.8-25.7 11.3-36.8 41.7-24.8 67.101l35.9 75.8c11.601 24.399 40.501 35.2 65.301 24.399z"></path>
             </svg>
             <p className="leading-relaxed text-lg">
-              最安全，最快速的纯前端图片加水印，拒绝上传保证个人信息安全。
+              最安全，最快速的纯前端图片加水印，无需上传保证个人信息安全。
+              <br />
+              在各种证件上添加
+              <span className="text-indigo-500">
+                「仅用于办理XXXX，他用无效」
+              </span>
+              防止证件被他人盗用！
             </p>
-            <span className="inline-block h-1 w-10 rounded bg-indigo-500 mt-8 mb-6"></span>
-            <h2 className="text-gray-900 font-medium title-font tracking-wider text-sm">
-              主要用途
-            </h2>
-            <p className="text-xl text-gray-500">
-              在各种证件上添加“仅用于办理XXXX，他用无效。”，防止证件被他人盗用！
-            </p>
-            <a
-              className="block"
-              href="https://www.sohu.com/a/257807692_160569"
-              target="_blank"
-            >
-              新闻：身份证复印件被盗用所造成的损失，你想象不到！
-            </a>
-            <a
-              className="block"
-              href="https://www.zhihu.com/question/20632460"
-              target="_blank"
-            >
-              知乎：身份证复印件给别人怎么避免安全问题？
-            </a>
+            <span className="inline-block h-1 w-10 rounded bg-indigo-500 mt-8"></span>
+          </div>
+        </div>
+      </section>
+
+      <section className="text-gray-600 body-font">
+        <div className="container px-5 py-12 mx-auto">
+          <div className="flex flex-wrap -m-4">
+            <div className="p-4 md:w-1/3">
+              <div className="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
+                <img
+                  className="lg:h-48 md:h-36 w-full object-cover object-center"
+                  src="https://images.pexels.com/photos/3839649/pexels-photo-3839649.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=720&w=400"
+                  alt="blog"
+                />
+                <div className="p-6">
+                  <h2 className="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">
+                    CATEGORY
+                  </h2>
+                  <h1 className="title-font text-lg font-medium text-gray-900 mb-3">
+                    新闻：身份证复印件被盗用所造成的损失，你想象不到！
+                  </h1>
+                  <p className="leading-relaxed mb-3">
+                    你能想象你的别墅一夜之间没有了吗？你能想象你一夜之间欠了银行十几万吗？你能想象因为身份证复印件没有签注而被人告上法庭吗？惨痛案例告诫人们--身份证复印件签注书写太重要了！知道的人越多，就一定会有更少的人受骗。
+                  </p>
+                  <div className="flex items-center flex-wrap ">
+                    <a
+                      className="text-indigo-500 inline-flex items-center md:mb-2 lg:mb-0"
+                      href="http://www.360doc.com/content/15/0923/17/22513831_501073654.shtml"
+                      target="_blank"
+                    >
+                      阅读详情
+                      <svg
+                        className="w-4 h-4 ml-2"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        fill="none"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <path d="M5 12h14"></path>
+                        <path d="M12 5l7 7-7 7"></path>
+                      </svg>
+                    </a>
+                    <span className="text-gray-400 mr-3 inline-flex items-center lg:ml-auto md:ml-0 ml-auto leading-none text-sm pr-3 py-1 border-r-2 border-gray-200">
+                      <svg
+                        className="w-4 h-4 mr-1"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        fill="none"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        viewBox="0 0 24 24"
+                      >
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                        <circle cx="12" cy="12" r="3"></circle>
+                      </svg>
+                      1.2K
+                    </span>
+                    <span className="text-gray-400 inline-flex items-center leading-none text-sm">
+                      <svg
+                        className="w-4 h-4 mr-1"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        fill="none"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        viewBox="0 0 24 24"
+                      >
+                        <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"></path>
+                      </svg>
+                      6
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="p-4 md:w-1/3">
+              <div className="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
+                <img
+                  className="lg:h-48 md:h-36 w-full object-cover object-center"
+                  src="https://images.pexels.com/photos/60504/security-protection-anti-virus-software-60504.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=720&w=400"
+                  alt="blog"
+                />
+                <div className="p-6">
+                  <h2 className="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">
+                    CATEGORY
+                  </h2>
+                  <h1 className="title-font text-lg font-medium text-gray-900 mb-3">
+                    百科：为什么身份证复印件要加水印？避免证件被盗用，这样加水印才安全
+                  </h1>
+                  <p className="leading-relaxed mb-3">
+                    在日常生活中，提供身份证或者其它证件复印件，是现代人经常会遇到的事，但这里边有些不可不知的风险。在大多场合理论来说，没有证件原件甚至本人在场的情况下，复印件并不能起到足够的证明作用。
+                  </p>
+                  <div className="flex items-center flex-wrap">
+                    <a
+                      className="text-indigo-500 inline-flex items-center md:mb-2 lg:mb-0"
+                      href="https://baijiahao.baidu.com/s?id=1648694020038096353&wfr=spider&for=pc"
+                      target="_blank"
+                    >
+                      阅读详情
+                      <svg
+                        className="w-4 h-4 ml-2"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        fill="none"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <path d="M5 12h14"></path>
+                        <path d="M12 5l7 7-7 7"></path>
+                      </svg>
+                    </a>
+                    <span className="text-gray-400 mr-3 inline-flex items-center lg:ml-auto md:ml-0 ml-auto leading-none text-sm pr-3 py-1 border-r-2 border-gray-200">
+                      <svg
+                        className="w-4 h-4 mr-1"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        fill="none"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        viewBox="0 0 24 24"
+                      >
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                        <circle cx="12" cy="12" r="3"></circle>
+                      </svg>
+                      8.3K
+                    </span>
+                    <span className="text-gray-400 inline-flex items-center leading-none text-sm">
+                      <svg
+                        className="w-4 h-4 mr-1"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        fill="none"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        viewBox="0 0 24 24"
+                      >
+                        <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"></path>
+                      </svg>
+                      123
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="p-4 md:w-1/3">
+              <div className="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
+                <img
+                  className="lg:h-48 md:h-36 w-full object-cover object-center"
+                  src="https://images.pexels.com/photos/3760067/pexels-photo-3760067.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=720&w=400"
+                  alt="blog"
+                />
+                <div className="p-6">
+                  <h2 className="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">
+                    CATEGORY
+                  </h2>
+                  <h1 className="title-font text-lg font-medium text-gray-900 mb-3">
+                    知乎：身份证复印件给别人怎么避免安全问题？涉及的法律纠纷有哪些？
+                  </h1>
+                  <p className="leading-relaxed mb-3">
+                    在大多场合理论上来说，没有证件原件甚至本人在场的情况下，复印件并不能起到足够的证明作用。但由于审核不明等特殊原因，也有极大风险。所以，所提供的复印件最好加上水印，以防万一。
+                  </p>
+                  <div className="flex items-center flex-wrap ">
+                    <a
+                      className="text-indigo-500 inline-flex items-center md:mb-2 lg:mb-0"
+                      href="https://www.zhihu.com/question/20632460"
+                      target="_blank"
+                    >
+                      阅读详情
+                      <svg
+                        className="w-4 h-4 ml-2"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        fill="none"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <path d="M5 12h14"></path>
+                        <path d="M12 5l7 7-7 7"></path>
+                      </svg>
+                    </a>
+                    <span className="text-gray-400 mr-3 inline-flex items-center lg:ml-auto md:ml-0 ml-auto leading-none text-sm pr-3 py-1 border-r-2 border-gray-200">
+                      <svg
+                        className="w-4 h-4 mr-1"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        fill="none"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        viewBox="0 0 24 24"
+                      >
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                        <circle cx="12" cy="12" r="3"></circle>
+                      </svg>
+                      4.2K
+                    </span>
+                    <span className="text-gray-400 inline-flex items-center leading-none text-sm">
+                      <svg
+                        className="w-4 h-4 mr-1"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        fill="none"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        viewBox="0 0 24 24"
+                      >
+                        <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"></path>
+                      </svg>
+                      23
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -486,7 +702,7 @@ export default function IndexPage() {
                   <path d="M22 11.08V12a10 10 0 11-5.93-9.14"></path>
                   <path d="M22 4L12 14.01l-3-3"></path>
                 </svg>
-                <span className="title-font font-medium">批量处理</span>
+                <span className="title-font font-medium">批量处理、导出</span>
               </div>
             </div>
             <div className="p-2 sm:w-1/2 w-full">
@@ -503,7 +719,7 @@ export default function IndexPage() {
                   <path d="M22 11.08V12a10 10 0 11-5.93-9.14"></path>
                   <path d="M22 4L12 14.01l-3-3"></path>
                 </svg>
-                <span className="title-font font-medium">批量导出</span>
+                <span className="title-font font-medium">可离线断网使用</span>
               </div>
             </div>
             <div className="p-2 sm:w-1/2 w-full">
@@ -527,7 +743,7 @@ export default function IndexPage() {
           <a
             href="https://github.com/Turkyden/watermark-pro"
             target="_blank"
-            className="flex justify-center items-center w-32 text-center mx-auto mt-16 text-white bg-indigo-500 border-0 py-2 focus:outline-none hover:bg-indigo-600 rounded text-lg"
+            className="flex justify-center items-center w-32 text-center mx-auto mt-16 text-white bg-indigo-500 border-0 py-2 focus:outline-none hover:bg-indigo-600 rounded-full text-lg"
           >
             <GithubOutlined />
             <span className="pl-2">Resource</span>
@@ -566,7 +782,7 @@ export default function IndexPage() {
       <footer className="text-gray-600 body-font bg-gray-900">
         <div className="container px-5 pt-16 pb-24 mx-auto">
           <div className="flex flex-wrap md:text-left text-center -mb-10 -mx-4">
-            <div className="lg:w-1/6 md:w-1/2 w-full px-4">
+            <div className="lg:w-1/5 md:w-1/2 w-full px-4">
               <h2 className="title-font font-medium text-gray-300 tracking-widest text-lg mb-3">
                 实用工具
               </h2>
@@ -604,12 +820,21 @@ export default function IndexPage() {
                     href=""
                     target="_blank"
                   >
-                    Fourth Link
+                    RGB 色彩转换
+                  </a>
+                </li>
+                <li>
+                  <a
+                    className="text-gray-300 hover:text-indigo-500 hover:underline"
+                    href="https://color.adobe.com/zh/create/color-wheel"
+                    target="_blank"
+                  >
+                    Adobe 标准色卡
                   </a>
                 </li>
               </nav>
             </div>
-            <div className="lg:w-1/6 md:w-1/2 w-full px-4">
+            <div className="lg:w-1/5 md:w-1/2 w-full px-4">
               <h2 className="title-font font-medium text-gray-300 tracking-widest text-lg mb-3">
                 设计酷站
               </h2>
@@ -656,12 +881,12 @@ export default function IndexPage() {
                     href=""
                     target="_blank"
                   >
-                    Belance
+                    Behance
                   </a>
                 </li>
               </nav>
             </div>
-            <div className="lg:w-1/6 md:w-1/2 w-full px-4">
+            <div className="lg:w-1/5 md:w-1/2 w-full px-4">
               <h2 className="title-font font-medium text-gray-300 tracking-widest text-lg mb-3">
                 开源项目
               </h2>
@@ -704,7 +929,7 @@ export default function IndexPage() {
                 </li>
               </nav>
             </div>
-            <div className="lg:w-1/6 md:w-1/2 w-full px-4">
+            <div className="lg:w-1/5 md:w-1/2 w-full px-4">
               <h2 className="title-font font-medium text-gray-300 tracking-widest text-lg mb-3">
                 友情链接
               </h2>
@@ -733,7 +958,7 @@ export default function IndexPage() {
                     href=""
                     target="_blank"
                   >
-                    趣学前端
+                    徐小夕·趣学前端
                   </a>
                 </li>
                 <li>
@@ -742,12 +967,12 @@ export default function IndexPage() {
                     href=""
                     target="_blank"
                   >
-                    Fourth Link
+                    Yck 前端真好玩
                   </a>
                 </li>
               </nav>
             </div>
-            <div className="lg:w-1/6 md:w-1/2 w-full px-4">
+            <div className="lg:w-1/5 md:w-1/2 w-full px-4">
               <h2 className="title-font font-medium text-gray-300 tracking-widest text-lg mb-3">
                 更多作品
               </h2>
@@ -755,80 +980,37 @@ export default function IndexPage() {
                 <li>
                   <a
                     className="text-gray-300 hover:text-indigo-500 hover:underline"
-                    href=""
+                    href="https://www.github.com/Turkyden/react-darkreader"
                     target="_blank"
                   >
-                    First Link
+                    React Darkreader
                   </a>
                 </li>
                 <li>
                   <a
                     className="text-gray-300 hover:text-indigo-500 hover:underline"
-                    href=""
+                    href="https://www.github.com/Turkyden/image-hover"
                     target="_blank"
                   >
-                    Second Link
+                    Image Hover Effects
                   </a>
                 </li>
                 <li>
                   <a
                     className="text-gray-300 hover:text-indigo-500 hover:underline"
-                    href=""
+                    href="https://www.github.com/Turkyden/vue-typical"
                     target="_blank"
                   >
-                    Third Link
+                    Vue Typical
                   </a>
                 </li>
                 <li>
                   <a
                     className="text-gray-300 hover:text-indigo-500 hover:underline"
-                    href=""
+                    href="https://www.github.com/Turkyden/digital-go"
                     target="_blank"
                   >
-                    Fourth Link
-                  </a>
-                </li>
-              </nav>
-            </div>
-            <div className="lg:w-1/6 md:w-1/2 w-full px-4">
-              <h2 className="title-font font-medium text-gray-300 tracking-widest text-lg mb-3">
-                CATEGORIES
-              </h2>
-              <nav className="list-none mb-10">
-                <li>
-                  <a
-                    className="text-gray-300 hover:text-indigo-500 hover:underline"
-                    href=""
-                    target="_blank"
-                  >
-                    First Link
-                  </a>
-                </li>
-                <li>
-                  <a
-                    className="text-gray-300 hover:text-indigo-500 hover:underline"
-                    href=""
-                    target="_blank"
-                  >
-                    Second Link
-                  </a>
-                </li>
-                <li>
-                  <a
-                    className="text-gray-300 hover:text-indigo-500 hover:underline"
-                    href=""
-                    target="_blank"
-                  >
-                    Third Link
-                  </a>
-                </li>
-                <li>
-                  <a
-                    className="text-gray-300 hover:text-indigo-500 hover:underline"
-                    href=""
-                    target="_blank"
-                  >
-                    Fourth Link
+                    Digital Go
                   </a>
                 </li>
               </nav>
