@@ -42,7 +42,7 @@ const schema = {
       required: false,
       type: 'string',
       format: 'color',
-      default: '#000000',
+      default: '#00000080',
     },
     fontSize: {
       title: 'Font Size (px)',
@@ -381,7 +381,7 @@ export default function IndexPage() {
             <h2 className="text-gray-900 font-medium title-font tracking-wider text-sm">
               主要用途
             </h2>
-            <p className="text-gray-500">
+            <p className="text-xl text-gray-500">
               在各种证件上添加“仅用于办理XXXX，他用无效。”，防止证件被他人盗用！
             </p>
             <a
