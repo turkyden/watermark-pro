@@ -2,7 +2,7 @@ English | [简体中文](./README_cn-zh.md)
 
 <h1 align="center">WaterMark Pro</h1>
 
-<p align="center">💦 拒绝上传，一个开箱即用纯前端实现的水印生成工具。</p>
+<p align="center">💦 无需上传，一个离线可用的纯前端水印生成工具。</p>
 
 <p align="center"><a href="https://watermark-pro.vercel.app" target="_blank">: : : Live Demo : : :</a></p>
 
@@ -15,7 +15,6 @@ English | [简体中文](./README_cn-zh.md)
 - [x] WaterMark Whole Page
 - [x] Multi File
 - [x] No Backend & Pure Frontend (Super Security)
-
 ## 🔨 Contribution
 
 Install dependencies,

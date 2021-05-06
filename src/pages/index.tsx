@@ -362,7 +362,7 @@ export default function IndexPage() {
             </div>
           )}
         </Upload>
-        <div className="animate-bounce w-full absolute bottom-2 left-0 text-center">
+        <div className="animate-bounce w-full absolute bottom-2 left-0 text-center text-gray-300">
           <ArrowDownOutlined
             className="text-2xl"
             onClick={() =>
@@ -752,12 +752,19 @@ export default function IndexPage() {
       </section>
 
       <section className="w-full pb-32">
-        <h2 className="text-6xl text-center">☕</h2>
-        <p className="text-center py-2">
-          如果这个小工具对你<span className="text-2xl"> 有用</span>
-        </p>
+        <h2 className="text-3xl text-center">参与贡献</h2>
+        <p className="text-center py-2">感谢以下开发者的积极贡献！</p>
+        <div className="text-center pt-4">
+          <img src="https://contrib.rocks/image?repo=Turkyden/watermark-pro" />
+        </div>
+      </section>
+
+      <section className="w-full pb-32">
+        <h2 className="text-3xl text-center">捐赠</h2>
+        <p className="text-center py-2">如果这个小工具对你有帮助</p>
         <p className="text-center pb-10">
-          你可以赞助作者 or 请他喝一杯咖啡吧！
+          你也可以赞助作者 or 请他喝一杯 <span className="text-2xl">☕</span>{' '}
+          哦！
         </p>
         <table className="border-collapse border-solid border gray-200 text-center m-auto">
           <thead>

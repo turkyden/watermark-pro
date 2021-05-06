@@ -41,13 +41,13 @@ export default function Scaler({
             ></path>
           </svg>
         </div>
-        <div className="px-2 py-2 text-gray-500 hover:text-blue-500">
+        <div className="px-2 py-2 text-gray-500 hover:text-gray-400">
           <PlusOutlined onClick={onZoomUp} />
         </div>
-        <div className="px-2 py-2 text-gray-500 hover:text-blue-500">
+        <div className="px-2 py-2 text-gray-500 hover:text-gray-400">
           <MinusOutlined onClick={onZoomDown} />
         </div>
-        <div className="px-2 py-2 text-gray-500 hover:text-blue-500">
+        <div className="px-2 py-2 text-gray-500 hover:text-gray-400">
           <ReloadOutlined onClick={onReset} />
         </div>
         <div className="px-2 py-2 text-gray-500">
