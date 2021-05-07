@@ -350,6 +350,7 @@ export default function IndexPage() {
 
       <section className="w-full h-34 p-4 overflow-auto bg-gradient-to-r from-indigo-600 via-indigo-500 to-indigo-400 shadow">
         <Upload
+          method="get"
           listType="picture-card"
           fileList={fileList}
           onPreview={onPreview}
