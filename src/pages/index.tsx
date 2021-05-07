@@ -243,7 +243,8 @@ export default function IndexPage() {
     };
     for (let index = 0; index < fileList.length; index++) {
       const file = fileList[index];
-      const { name } = file;
+      const { name, uid } = file;
+      setSeleted(uid);
       const imgBlob = await renderCanvas();
       zip.file(name, imgBlob);
     }
