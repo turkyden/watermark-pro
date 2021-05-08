@@ -18,7 +18,7 @@ import initialImage from '@/assets/watermark.jpg';
 import '../../node_modules/pattern.css/dist/pattern.css';
 import './index.css';
 import { Scaler, useScaler } from './../components/scaler';
-import Weixin from '@/assets/weixin.png';
+import Wechat from '@/assets/wechat.png';
 import Alipay from '@/assets/alipay.png';
 
 import { getBase64 } from '@/untils';
@@ -768,20 +768,14 @@ export default function IndexPage() {
           你也可以赞助作者 or 请他喝一杯 <span className="text-2xl">☕</span>{' '}
           哦！
         </p>
-        <table className="border-collapse border-solid border gray-200 text-center m-auto">
-          <thead>
-            <tr>
-              <th className="border border-solid border-gray-200">微信</th>
-              <th className="border border-solid border-gray-200">支付宝</th>
-            </tr>
-          </thead>
+        <table className="border-0 text-center m-auto">
           <tbody>
             <tr>
-              <td className="border border-solid border-gray-200">
-                <img src={Weixin} width={150} alt="微信支付" />
+              <td>
+                <img src={Wechat} width={320} alt="微信支付" />
               </td>
-              <td className="border border-solid border-gray-200">
-                <img src={Alipay} width={140} alt="支付宝支付" />
+              <td>
+                <img src={Alipay} width={320} alt="支付宝支付" />
               </td>
             </tr>
           </tbody>
