@@ -1,5 +1,5 @@
 import React, { useState, useReducer, useMemo, useCallback } from 'react';
-import { Button, Upload } from 'antd';
+import { Button, Upload, Input } from 'antd';
 import {
   PlusOutlined,
   CaretUpOutlined,
@@ -13,6 +13,7 @@ import JSZip from 'jszip';
 import Draggable from 'react-draggable';
 import { useSize } from 'ahooks';
 import { saveAs } from 'file-saver';
+import ImgCrop from 'antd-img-crop';
 import { Watermark } from '@/components';
 import initialImage from '@/assets/watermark.jpg';
 import '../../node_modules/pattern.css/dist/pattern.css';
@@ -20,7 +21,8 @@ import './index.css';
 import { Scaler, useScaler } from './../components/scaler';
 import Wechat from '@/assets/wechat.png';
 import Alipay from '@/assets/alipay.png';
-
+import 'antd/es/modal/style';
+import 'antd/es/slider/style';
 import { getBase64 } from '@/untils';
 
 const schema = {
@@ -275,7 +277,9 @@ export default function IndexPage() {
         onWheel={scaleAction.onWheel}
       >
         <div style={{ transform: `scale(${scale / 100})` }}>
-          <div className="text-gray-800 text-xl pb-2 px-2">{fileName}</div>
+          <div className="text-gray-800 text-xl">
+            <span className="inline-block p-2">{fileName}</span>
+          </div>
           <Watermark url={previewImage} options={options} />
         </div>
         <Draggable defaultPosition={{ x: -16, y: 16 }} handle=".handle">
@@ -350,20 +354,22 @@ export default function IndexPage() {
       </section>
 
       <section className="w-full h-34 p-4 overflow-auto bg-gradient-to-r from-indigo-600 via-indigo-500 to-indigo-400 shadow">
-        <Upload
-          method="get"
-          listType="picture-card"
-          fileList={fileList}
-          onPreview={onPreview}
-          onChange={onChange}
-        >
-          {fileList.length >= 8 ? null : (
-            <div>
-              <PlusOutlined />
-              <div style={{ marginTop: 8 }}>Upload</div>
-            </div>
-          )}
-        </Upload>
+        <ImgCrop modalTitle="图片裁剪" grid>
+          <Upload
+            method="get"
+            listType="picture-card"
+            fileList={fileList}
+            onPreview={onPreview}
+            onChange={onChange}
+          >
+            {fileList.length >= 8 ? null : (
+              <div>
+                <PlusOutlined />
+                <div style={{ marginTop: 8 }}>Upload</div>
+              </div>
+            )}
+          </Upload>
+        </ImgCrop>
         <div className="animate-bounce w-full absolute bottom-2 left-0 text-center text-gray-300">
           <ArrowDownOutlined
             className="text-2xl"

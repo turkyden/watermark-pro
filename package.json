@@ -28,6 +28,7 @@
     "@umijs/preset-react": "1.x",
     "ahooks": "^2.10.1",
     "antd": "^4.15.2",
+    "antd-img-crop": "^3.14.1",
     "file-saver": "^2.0.5",
     "form-render": "^1.2.0",
     "html2canvas": "^1.0.0-rc.7",
