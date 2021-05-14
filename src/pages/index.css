@@ -24,3 +24,6 @@
   background: #fff;
 }
 
+.ant-upload > div > div{
+  display: none;
+}
