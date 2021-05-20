@@ -39,7 +39,7 @@ $ yarn start
 - [watermark](https://github.com/pansyjs/react-components/tree/master/packages/watermark)
 - [pattern-css](https://bansal.io/pattern-css)
 - [jszip](https://github.com/Stuk/jszip)
-- [watermark 网页加水印 React 组件](https://github.com/pansyjs/watermark)
+- [@pansy/watermark 网页加水印 React 组件](https://github.com/pansyjs/watermark)
 
 ## License
 
