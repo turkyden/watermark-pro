@@ -17,6 +17,7 @@ English | [简体中文](./README_cn-zh.md)
 - [x] WaterMark Whole Page
 - [x] Multi File
 - [x] No Backend & Pure Frontend (Super Security)
+- [ ] 支持加图片样式水印
 ## 🔨 Contribution
 
 Install dependencies,
@@ -38,6 +39,7 @@ $ yarn start
 - [watermark](https://github.com/pansyjs/react-components/tree/master/packages/watermark)
 - [pattern-css](https://bansal.io/pattern-css)
 - [jszip](https://github.com/Stuk/jszip)
+- [watermark 网页加水印 React 组件](https://github.com/pansyjs/watermark)
 
 ## License
 
