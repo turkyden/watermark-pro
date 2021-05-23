@@ -2,7 +2,7 @@ English | [简体中文](./README_cn-zh.md)
 
 <h1 align="center">WaterMark Pro</h1>
 
-<p align="center">💦 无需上传，所见即所得，一个纯前端实现的证件加水印工具 WYSISWYG</p>
+<p align="center">💦 WYSISWYG, no upload, a tools for adding watermark for your certificate</p>
 
 <p align="center"><a href="https://watermark-pro.vercel.app" target="_blank">: : : Live Demo : : :</a></p>
 
@@ -16,7 +16,7 @@ English | [简体中文](./README_cn-zh.md)
 - [x] WaterMark Whole Page
 - [x] Multi File
 - [x] No Backend & Pure Frontend (Super Security)
-- [ ] 支持加图片样式水印
+- [ ] Support watermark with image
 - [ ] Mobile / Weixin APP
 - [ ] Electron Desktop App
 
