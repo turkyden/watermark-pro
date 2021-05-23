@@ -17,8 +17,8 @@ English | [简体中文](./README_cn-zh.md)
 - [x] Multi File
 - [x] No Backend & Pure Frontend (Super Security)
 - [ ] 支持加图片样式水印
-- [ ] Mobile Weixin APP (微信小程序)
-- [ ] Electron Desktop App （桌面版）
+- [ ] Mobile / Weixin APP
+- [ ] Electron Desktop App
 
 ## 🔨 Contribution
 
