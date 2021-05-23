@@ -43,6 +43,20 @@ $ yarn start
 - [jszip](https://github.com/Stuk/jszip)
 - [@pansy/watermark](https://github.com/pansyjs/watermark)
 
+## ❤️ Contributors
+
+Thanks goes to these people:
+
+![Contributors](https://contrib.rocks/image?repo=Turkyden/watermark-pro)
+
+Please Feel free to enjoy and participate in open source!
+
+## ⭐ Stargazers
+
+Thanks for your star!
+
+[![Stargazers repo roster for @Turkyden/watermark-pro](https://reporoster.com/stars/Turkyden/watermark-pro)](https://github.com/Turkyden/watermark-pro/stargazers)
+
 ## License
 
 [MIT](./LICENSE)
