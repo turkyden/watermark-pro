@@ -10,7 +10,7 @@ import confetti from 'canvas-confetti';
 import { Scaler, useScaler } from '@/components/Scaler';
 import Watermark from '@/components/Watermark';
 import Control from '@/components/Control';
-import HotKey from '@/components/HotKey2';
+import HotKey from '@/components/HotKey';
 
 import Market from '@/sections/Market';
 
