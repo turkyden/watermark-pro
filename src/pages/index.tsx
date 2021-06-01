@@ -190,11 +190,30 @@ export default function IndexPage() {
     }
   };
 
-  const onExport = () => {
+  const onExport = async () => {
     const canvasDOM = document.querySelector('canvas');
     if (canvasDOM) {
       canvasDOM.toBlob((blob) => saveAs(blob, fileName));
-      confetti({ particleCount: 150 });
+      await onConfetti();
+    }
+  };
+
+  const onConfetti = async () => {
+    const randomInRange = (min: number, max: number) => {
+      return Math.random() * (max - min) + min;
+    };
+    const sleep = () =>
+      new Promise((resolve, reject) => {
+        window.setTimeout(() => resolve(''), 100);
+      });
+    for (let index = 0; index < 5; index++) {
+      await sleep();
+      confetti({
+        angle: randomInRange(55, 125),
+        spread: randomInRange(30, 90),
+        particleCount: randomInRange(50, 100),
+        origin: { y: 0.6 },
+      });
     }
   };
 
@@ -245,7 +264,7 @@ export default function IndexPage() {
     }
     const blob = await zip.generateAsync({ type: 'blob' });
     saveAs(blob, `watermark_${new Date().getTime()}.zip`);
-    confetti({ particleCount: 150 });
+    await onConfetti();
   };
 
   return (
