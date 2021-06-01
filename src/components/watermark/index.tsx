@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import Watermark from './Watermark';
+
 interface Options {
   text: string;
   fontSize: number;
