@@ -331,22 +331,22 @@ export default function IndexPage() {
 
       {/* Upload Block */}
       <section className="w-full h-34 p-4 overflow-auto bg-gradient-to-r from-indigo-600 via-indigo-500 to-indigo-400 shadow">
-        <ImgCrop modalTitle="Image Crop" rotate grid>
-          <Upload
-            method="get"
-            listType="picture-card"
-            fileList={fileList}
-            onPreview={onPreview}
-            onChange={onChange}
-          >
-            {fileList.length >= 8 ? null : (
-              <div>
-                <PlusOutlined />
-                <div style={{ marginTop: 8 }}>Upload</div>
-              </div>
-            )}
-          </Upload>
-        </ImgCrop>
+        {/* <ImgCrop modalTitle="Image Crop" rotate grid> */}
+        <Upload
+          method="get"
+          listType="picture-card"
+          fileList={fileList}
+          onPreview={onPreview}
+          onChange={onChange}
+        >
+          {fileList.length >= 8 ? null : (
+            <div>
+              <PlusOutlined />
+              <div style={{ marginTop: 8 }}>Upload</div>
+            </div>
+          )}
+        </Upload>
+        {/* </ImgCrop> */}
         <div className="animate-bounce w-full absolute bottom-2 left-0 text-center text-gray-300">
           <ArrowDownOutlined
             className="text-2xl"
