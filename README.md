@@ -59,7 +59,7 @@ Thanks for your star!
 
 ## CDN
 
-[Click me to refresh cdn cache](https://purge.jsdelivr.net/gh/turkyden/watermark-pro@gh-pages/)
+[Click me to refresh cdn cache &raar;](https://purge.jsdelivr.net/gh/turkyden/watermark-pro@gh-pages/)
 
 ## License
 
