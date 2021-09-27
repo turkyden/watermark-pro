@@ -14,6 +14,15 @@ export default defineConfig({
         '💦 最安全，最快速的纯前端图片加水印，拒绝上传保证个人信息安全。',
     },
   ],
+  hash: true,
+  analytics: {
+    baidu: "d4071b11b31dd14a32c788c74c1d5b6b",
+  },
+  runtimePublicPath: true,
+  publicPath:
+    process.env.NODE_ENV === "production"
+      ? "https://cdn.jsdelivr.net/gh/turkyden/watermark-pro@gh-pages/"
+      : "/",
   theme: {
     'primary-color': '#6366F1',
     'border-radius-base': '4px',
