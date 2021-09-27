@@ -18,11 +18,11 @@ export default defineConfig({
   analytics: {
     baidu: 'd4071b11b31dd14a32c788c74c1d5b6b',
   },
-  runtimePublicPath: true,
-  publicPath:
-    process.env.NODE_ENV === 'production'
-      ? 'https://cdn.jsdelivr.net/gh/turkyden/watermark-pro@gh-pages/'
-      : '/',
+  // runtimePublicPath: true,
+  // publicPath:
+  //   process.env.NODE_ENV === 'production'
+  //     ? 'https://cdn.jsdelivr.net/gh/turkyden/watermark-pro@gh-pages/'
+  //     : '/',
   theme: {
     'primary-color': '#6366F1',
     'border-radius-base': '4px',
