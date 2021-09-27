@@ -57,6 +57,12 @@ Thanks for your star!
 
 [![Stargazers repo roster for @Turkyden/watermark-pro](https://reporoster.com/stars/Turkyden/watermark-pro)](https://github.com/Turkyden/watermark-pro/stargazers)
 
+## CDN
+
+Refresh cdn cache
+
+https://purge.jsdelivr.net/gh/turkyden/watermark-pro@gh-pages/
+
 ## License
 
 [MIT](./LICENSE)
