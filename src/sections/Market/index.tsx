@@ -640,7 +640,6 @@ export const Market: React.FC = () => {
                   <a
                     className="text-gray-300 hover:text-indigo-500 hover:underline"
                     href="https://www.github.com/Turkyden/digital-go"
-                    target="_blank"
                   >
                     Digital Go
                   </a>
