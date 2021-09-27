@@ -16,7 +16,7 @@ English | [简体中文](./README_cn-zh.md)
 - [x] WaterMark Whole Page
 - [x] Multi File
 - [x] No Backend & Pure Frontend (Super Security)
-- [ ] Support watermark with image
+- [x] Support watermark with image
 - [ ] Mobile / Weixin APP
 - [ ] Electron Desktop App
 
