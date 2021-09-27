@@ -16,13 +16,13 @@ export default defineConfig({
   ],
   hash: true,
   analytics: {
-    baidu: "d4071b11b31dd14a32c788c74c1d5b6b",
+    baidu: 'd4071b11b31dd14a32c788c74c1d5b6b',
   },
   runtimePublicPath: true,
   publicPath:
-    process.env.NODE_ENV === "production"
-      ? "https://cdn.jsdelivr.net/gh/turkyden/watermark-pro@gh-pages/"
-      : "/",
+    process.env.NODE_ENV === 'production'
+      ? 'https://cdn.jsdelivr.net/gh/turkyden/watermark-pro@gh-pages/'
+      : '/',
   theme: {
     'primary-color': '#6366F1',
     'border-radius-base': '4px',
@@ -31,6 +31,7 @@ export default defineConfig({
     dark: false, // 开启暗色主题
     compact: true, // 开启紧凑主题
   },
+  mfsu: {},
   nodeModulesTransform: {
     type: 'none',
   },
