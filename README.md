@@ -6,7 +6,7 @@ English | [简体中文](./README_cn-zh.md)
 
 ![watermark pro](https://cdn.jsdelivr.net/gh/Turkyden/watermark-pro/screenshot.png)
 
-<p align="center"><a href="https://watermark-pro.vercel.app" target="_blank">: : : Live Demo : : :</a></p>
+<p align="center"><a href="https://watermark-pro.turkyden.com" target="_blank">: : : Live Demo : : :</a></p>
 
 ## ✨ Feather
 
