@@ -1,5 +1,5 @@
 import React, { useState, useReducer, useMemo } from 'react';
-import { Button, Upload } from 'antd';
+import { Button, Upload, Popover } from 'antd';
 import { ArrowDownOutlined, PlusOutlined } from '@ant-design/icons';
 import FormRender, { useForm } from 'form-render';
 import JSZip from 'jszip';
@@ -272,9 +272,7 @@ export default function IndexPage() {
       {/* Header */}
       <header className="fixed z-40 top-4 left-4 flex justify-start items-center content-center">
         <div className="pr-4 text-gray-800">
-          <div className="text-2xl font-semibold font-sans z-50">
-            WaterMark Pro
-          </div>
+          <div className="text-2xl font-bold font-sans z-50">WaterMark Pro</div>
         </div>
         <a href="https://github.com/Turkyden/watermark-pro" target="_blank">
           <img
@@ -285,17 +283,44 @@ export default function IndexPage() {
         </a>
       </header>
 
+      {/* Buy me a coofee */}
+      <div className="fixed top-20 left-4 z-40 cursor-pointer animate-bounce">
+        <Popover
+          content={
+            <div className="p-2">
+              <img
+                className="w-64 rounded"
+                src={require('../assets/weixin.jpeg')}
+                alt="buymeacoffee"
+              />
+            </div>
+          }
+          title=""
+        >
+          <img
+            className="w-36 shadow-2xl transition"
+            src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png"
+            alt="Buy Me A Coffee"
+          />
+        </Popover>
+      </div>
+
       {/* Canvas */}
       <section
         className="pattern-checks-sm | w-full relative bg-gray-200 text-gray-300 flex flex-col justify-center items-center overflow-hidden"
         style={{ height: screenHeight - 128 }}
         onWheel={scaleAction.onWheel}
       >
-        <div style={{ transform: `scale(${scale / 100})` }}>
-          <div className="text-gray-800 text-xl">
+        <div
+          className="relative"
+          style={{ transform: `scale(${scale / 100})` }}
+        >
+          <div className="text-gray-800 text-xl absolute -top-10 left-0">
             <span className="inline-block p-2">{fileName}</span>
           </div>
-          <Watermark url={previewImage} options={options} />
+          <div className="bg-white">
+            <Watermark url={previewImage} options={options} />
+          </div>
         </div>
         <Control title="💦 WaterMark Pro" defaultPosition={{ x: -16, y: 16 }}>
           <FormRender

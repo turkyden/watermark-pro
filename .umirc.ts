@@ -3,6 +3,7 @@ import { defineConfig } from 'umi';
 export default defineConfig({
   title:
     'Watermark Pro 最安全，最快速的纯前端图片加水印，拒绝上传保证个人信息安全。',
+  favicon: 'https://www.buymeacoffee.com/favicon.ico',
   metas: [
     {
       name: 'keywords',

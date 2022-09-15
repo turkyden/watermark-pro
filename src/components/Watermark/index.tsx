@@ -32,12 +32,7 @@ const ReactWatermark: React.FC<WatermarkProps> = ({
     watermark.current?.draw(url);
   }, [url, options]);
 
-  return (
-    <canvas
-      ref={ref}
-      className="border-4 border-solid border-gray-300 hover:border-blue-500 shadow-2xl "
-    />
-  );
+  return <canvas ref={ref} />;
 };
 
 export default ReactWatermark;
