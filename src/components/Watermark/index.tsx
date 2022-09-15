@@ -32,7 +32,7 @@ const ReactWatermark: React.FC<WatermarkProps> = ({
     watermark.current?.draw(url);
   }, [url, options]);
 
-  return <canvas ref={ref} />;
+  return <canvas ref={ref} width="1024" height="683" />;
 };
 
 export default ReactWatermark;
