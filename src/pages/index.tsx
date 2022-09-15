@@ -318,7 +318,7 @@ export default function IndexPage() {
           <div className="text-gray-800 text-xl absolute -top-10 left-0">
             <span className="inline-block p-2">{fileName}</span>
           </div>
-          <div className="bg-white">
+          <div className="">
             <Watermark url={previewImage} options={options} />
           </div>
         </div>
