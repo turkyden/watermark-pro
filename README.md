@@ -34,6 +34,12 @@ Start the dev server,
 $ yarn start
 ```
 
+## ✨ 关注我
+
+这是作者的微信「视频号」，每天分享一些有趣的 Saas 小软件，欢迎关注 ~
+
+<img width="200" src="https://user-images.githubusercontent.com/24560160/230781326-de84d919-1410-4b8a-ad81-3b0f6ffbe7d2.png">
+
 ## 🔖 Refference
 
 - [watermark](http://watermark.dxcweb.com/)
